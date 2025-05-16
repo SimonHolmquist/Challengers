@@ -1,6 +1,9 @@
-﻿using Challengers.Infrastructure.Persistence;
+﻿using Challengers.Application.Mappings;
+using Challengers.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using MediatR;
+using Challengers.Application.Features.Tournaments.Commands.CreateTournament;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,8 +28,11 @@ builder.Services.AddDbContext<ChallengersDbContext>(options =>
     });
 });
 
+builder.Services.AddMediatR(cfg =>
+    cfg.RegisterServicesFromAssemblyContaining<CreateTournamentCommand>());
 
 builder.Services.AddControllers();
+builder.Services.AddAutoMapper(typeof(DtoProfile).Assembly);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
