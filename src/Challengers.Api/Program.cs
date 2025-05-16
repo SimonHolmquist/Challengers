@@ -1,4 +1,5 @@
-﻿using Challengers.Infrastructure.Persistence;
+﻿using Challengers.Application.Mappings;
+using Challengers.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -27,6 +28,7 @@ builder.Services.AddDbContext<ChallengersDbContext>(options =>
 
 
 builder.Services.AddControllers();
+builder.Services.AddAutoMapper(typeof(DtoProfile).Assembly);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
