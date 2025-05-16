@@ -1,3 +1,5 @@
+using Challengers.Domain.Enums;
+
 namespace Challengers.Domain.Entities;
 
 public abstract class Player
@@ -5,8 +7,9 @@ public abstract class Player
     public Guid Id { get; } = Guid.NewGuid();
     public string Name { get; }
     public int Skill { get; }
+    public Gender Gender { get; private set; }
 
-    protected Player(string name, int skill)
+    protected Player(string name, int skill, Gender gender)
     {
         if (string.IsNullOrWhiteSpace(name))
             throw new ArgumentException(NameRequired, nameof(name));
@@ -17,6 +20,7 @@ public abstract class Player
 
         Name = name;
         Skill = skill;
+        Gender = gender;
     }
 
     public int GenerateLuck(Random? rng)

@@ -9,9 +9,8 @@ public class Tournament
     public string Name { get; private set; }
     public Gender Gender { get; private set; }
     public DateTime CreatedAt { get; private set; } = DateTime.UtcNow;
-
-    public IReadOnlyList<List<Match>> Rounds => _rounds.AsReadOnly();
-    private readonly List<List<Match>> _rounds = [];
+    private readonly List<Match> _matches = [];
+    public IReadOnlyCollection<Match> Matches => _matches.AsReadOnly();
 
     public Player? Winner { get; private set; }
 
@@ -42,17 +41,17 @@ public class Tournament
         var currentPlayers = new List<Player>(players);
         while (currentPlayers.Count >= MinPlayers)
         {
-            var round = new List<Match>();
+            var matches = new List<Match>();
 
             for (int i = 0; i < currentPlayers.Count; i += MinPlayers)
             {
                 var match = new Match(currentPlayers[i], currentPlayers[i + 1]);
                 match.Simulate(rng);
-                round.Add(match);
+                matches.Add(match);
             }
 
-            _rounds.Add(round);
-            currentPlayers = [.. round.Select(m => m.Winner!)];
+            _matches.AddRange(matches);
+            currentPlayers = [.. matches.Select(m => m.Winner!)];
         }
 
         Winner = currentPlayers.Single();
@@ -60,5 +59,4 @@ public class Tournament
     }
 
     private static bool IsPowerOfTwo(int value) => value > 0 && (value & (value - 1)) == 0;
-
 }

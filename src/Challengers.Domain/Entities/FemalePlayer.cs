@@ -1,11 +1,13 @@
-﻿namespace Challengers.Domain.Entities;
+﻿using Challengers.Domain.Enums;
+
+namespace Challengers.Domain.Entities;
 
 public class FemalePlayer : Player
 {
     public int ReactionTime { get; private set; }
 
     public FemalePlayer(string name, int skill, int reactionTime)
-        : base(name, skill)
+        : base(name, skill, Gender.Female)
     {
         if (reactionTime is < MinStat or > MaxStat)
             throw new ArgumentOutOfRangeException(

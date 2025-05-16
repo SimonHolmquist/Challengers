@@ -104,5 +104,23 @@ namespace Challengers.Domain.Resources {
                 return ResourceManager.GetString("Error_StrengthOutOfRange", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} * {1} (skill) + {2} * {3} (reaction time) + {4} * {5} (luck) = {6} total score.
+        /// </summary>
+        internal static string FemaleScoreExplanation {
+            get {
+                return ResourceManager.GetString("FemaleScoreExplanation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} * {1} (skill) + {2} * {3} (strength) + {4} * {5} (speed) + {6} * {7} (luck) = {8} total score.
+        /// </summary>
+        internal static string MaleScoreExplanation {
+            get {
+                return ResourceManager.GetString("MaleScoreExplanation", resourceCulture);
+            }
+        }
     }
 }

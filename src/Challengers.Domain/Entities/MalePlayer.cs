@@ -1,4 +1,6 @@
-﻿namespace Challengers.Domain.Entities;
+﻿using Challengers.Domain.Enums;
+
+namespace Challengers.Domain.Entities;
 
 public class MalePlayer : Player
 {
@@ -6,7 +8,7 @@ public class MalePlayer : Player
     public int Speed { get; private set; }
 
     public MalePlayer(string name, int skill, int strength, int speed)
-        : base(name, skill)
+        : base(name, skill, Gender.Male)
     {
         if (strength is < MinStat or > MaxStat)
             throw new ArgumentOutOfRangeException(
