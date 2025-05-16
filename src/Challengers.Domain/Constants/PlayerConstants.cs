@@ -1,4 +1,4 @@
-﻿namespace Challengers.Domain.Common;
+﻿namespace Challengers.Domain.Constants;
 
 public static class PlayerConstants
 {

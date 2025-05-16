@@ -21,7 +21,7 @@ services:
       - db
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Server=db;Database=ChallengersDb;User=sa;Password=MyS3cur3P@ss!;
+      - ConnectionStrings__DefaultConnection=Server=db;Database=ChallengersDb;User=sa;Password=MyS3cur3P@ss!;TrustServerCertificate=True;
 
 volumes:
   sql_data:
