@@ -9,6 +9,9 @@ public class Tournament
     public string Name { get; private set; }
     public Gender Gender { get; private set; }
     public DateTime CreatedAt { get; private set; } = DateTime.UtcNow;
+    private readonly List<Player> _players = [];
+    public IReadOnlyCollection<Player> Players => _players.AsReadOnly();
+
     private readonly List<Match> _matches = [];
     public IReadOnlyCollection<Match> Matches => _matches.AsReadOnly();
 
@@ -16,7 +19,7 @@ public class Tournament
 
     private bool _isCompleted = false;
 
-    public Tournament(string name, Gender gender)
+    public Tournament(string name, Gender gender, IList<Player> players)
     {
         if (string.IsNullOrWhiteSpace(name))
             throw new ArgumentException(GetMessage(TournamentNameRequired), nameof(name));
@@ -24,37 +27,35 @@ public class Tournament
         if (gender != Gender.Male && gender != Gender.Female)
             throw new ArgumentException(GetMessage(TournamentGenderInvalid));
 
+        if (players is null || players.Count < MinPlayers || !IsPowerOfTwo(players.Count))
+            throw new ArgumentException(GetMessage(TournamentInvalidPlayerCount), nameof(players));
+
         Name = name;
         Gender = gender;
+        _players.AddRange(players);
+
     }
 
-    public void Simulate(IList<Player> players, Random? rng = null)
+    public void Simulate(Random? rng = null)
     {
         if (_isCompleted)
             throw new InvalidOperationException(GetMessage(TournamentAlreadyCompleted));
 
-        if (players == null || players.Count < MinPlayers || !IsPowerOfTwo(players.Count))
-            throw new ArgumentException(TournamentInvalidPlayerCount);
+        if (_players.Count < MinPlayers || !IsPowerOfTwo(_players.Count))
+            throw new ArgumentException(GetMessage(TournamentInvalidPlayerCount));
 
         rng ??= new Random();
+        var queue = new Queue<Player>(_players);
 
-        var currentPlayers = new List<Player>(players);
-        while (currentPlayers.Count >= MinPlayers)
+        while (queue.Count > 1)
         {
-            var matches = new List<Match>();
-
-            for (int i = 0; i < currentPlayers.Count; i += MinPlayers)
-            {
-                var match = new Match(currentPlayers[i], currentPlayers[i + 1]);
-                match.Simulate(rng);
-                matches.Add(match);
-            }
-
-            _matches.AddRange(matches);
-            currentPlayers = [.. matches.Select(m => m.Winner!)];
+            var match = new Match(queue.Dequeue(), queue.Dequeue());
+            match.Simulate(rng);
+            _matches.Add(match);
+            queue.Enqueue(match.Winner!);
         }
 
-        Winner = currentPlayers.Single();
+        Winner = queue.Dequeue();
         _isCompleted = true;
     }
 

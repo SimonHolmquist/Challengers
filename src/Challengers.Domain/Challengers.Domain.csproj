@@ -7,22 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Update="Resources\Messages.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Messages.resx</DependentUpon>
-    </Compile>
+    <Compile Remove="Common\**" />
+    <EmbeddedResource Remove="Common\**" />
+    <None Remove="Common\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Resources\Messages.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Common\" />
+    <ProjectReference Include="..\Challengers.Shared\Challengers.Shared.csproj" />
   </ItemGroup>
 
 </Project>
