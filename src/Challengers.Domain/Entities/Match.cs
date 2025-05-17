@@ -1,9 +1,9 @@
-﻿namespace Challengers.Domain.Entities;
+﻿using Challengers.Domain.Common;
 
-public class Match
+namespace Challengers.Domain.Entities;
+
+public class Match : Entity<Guid>
 {
-    public Guid Id { get; private set; }
-
     public Guid TournamentId { get; private set; }
     public Tournament Tournament { get; private set; } = null!;
 

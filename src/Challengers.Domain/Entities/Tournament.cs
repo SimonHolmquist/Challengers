@@ -1,16 +1,13 @@
-﻿using Challengers.Domain.Enums;
+﻿using Challengers.Domain.Common;
+using Challengers.Domain.Enums;
 using Challengers.Shared.Helpers;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Challengers.Domain.Entities;
-
-public class Tournament
+public class Tournament : Entity<Guid>
 {
-    public Guid Id { get; private set; } = Guid.NewGuid();
     public string Name { get; private set; } = default!;
     public Gender Gender { get; private set; }
-    public DateTime CreatedAt { get; private set; } = DateTime.UtcNow;
-
     public List<Player> Players { get; private set; } = [];
     public List<Match> Matches { get; private set; } = [];
 
@@ -40,7 +37,6 @@ public class Tournament
         Name = name;
         Gender = gender;
         Players.AddRange(players);
-
     }
 
     public void Simulate(Random? rng = null)

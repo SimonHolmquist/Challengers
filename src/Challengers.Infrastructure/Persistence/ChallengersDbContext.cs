@@ -1,4 +1,5 @@
-﻿using Challengers.Domain.Entities;
+﻿using Challengers.Domain.Common;
+using Challengers.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -14,5 +15,15 @@ public class ChallengersDbContext(DbContextOptions<ChallengersDbContext> options
     {
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         base.OnModelCreating(modelBuilder);
+    }
+    public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        foreach (var entry in ChangeTracker.Entries<Entity<Guid>>())
+        {
+            if (entry.State == EntityState.Modified)
+                entry.Entity.SetModified();
+        }
+
+        return await base.SaveChangesAsync(cancellationToken);
     }
 }
