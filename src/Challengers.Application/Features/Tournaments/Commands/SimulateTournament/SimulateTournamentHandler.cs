@@ -13,6 +13,12 @@ public class SimulateTournamentHandler(
     public async Task<SimulateTournamentResponseDto> Handle(SimulateTournamentCommand request, CancellationToken cancellationToken)
     {
         var tournament = await _tournamentRepository.GetWithDetailsAsync(request.TournamentId, cancellationToken) ?? throw new KeyNotFoundException(GetMessage(TournamentNotFound));
+        
+        if (tournament.Winner is not null || tournament.Matches.Count != 0)
+        {
+            throw new ArgumentException(GetMessage(TournamentAlreadyCompleted));
+        }
+
         tournament.Simulate();
 
         await _tournamentRepository.SaveChangesAsync(cancellationToken);
@@ -21,7 +27,7 @@ public class SimulateTournamentHandler(
         return new SimulateTournamentResponseDto
         {
             TournamentId = tournament.Id,
-            Winner = tournament.Winner?.Name ?? string.Empty
+            Winner = tournament.Winner?.GetFullName() ?? string.Empty
         };
     }
 }
