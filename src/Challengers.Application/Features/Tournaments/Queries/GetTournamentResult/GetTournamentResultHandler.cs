@@ -1,7 +1,6 @@
 ﻿using Challengers.Application.DTOs;
+using Challengers.Application.Extensions;
 using Challengers.Application.Interfaces.Persistence;
-using Challengers.Domain.Enums;
-using Challengers.Shared.Extensions;
 using Challengers.Shared.Helpers;
 using Challengers.Shared.Resources;
 using MediatR;
@@ -18,10 +17,9 @@ public class GetTournamentResultHandler(
     {
         var tournament = await _tournamentRepository.GetWithDetailsAsync(request.TournamentId, cancellationToken);
 
-        if (tournament is null)
-            throw new KeyNotFoundException(LocalizedMessages.GetMessage(MessageKeys.TournamentNotFound));
-
-        return new TournamentResultDto
+        return tournament is null
+            ? throw new KeyNotFoundException(GetMessage(TournamentNotFound))
+            : new TournamentResultDto
         {
             Id = tournament.Id,
             Name = tournament.Name,
