@@ -34,5 +34,6 @@ public class FemalePlayer : Player
             score
         );
     }
+    public void SetReactionTime(int value) => ReactionTime = value;
 
 }

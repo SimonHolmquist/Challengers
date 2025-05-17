@@ -43,4 +43,7 @@ public class MalePlayer : Player
             score
         );
     }
+    public void SetStrength(int value) => Strength = value;
+    public void SetSpeed(int value) => Speed = value;
+
 }
