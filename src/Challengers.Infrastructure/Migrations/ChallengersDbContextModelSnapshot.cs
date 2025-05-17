@@ -93,6 +93,10 @@ namespace Challengers.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("bit")
+                        .HasColumnName("IsCompleted");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -106,6 +110,21 @@ namespace Challengers.Infrastructure.Migrations
                     b.HasIndex("WinnerId");
 
                     b.ToTable("Tournaments");
+                });
+
+            modelBuilder.Entity("PlayerTournament", b =>
+                {
+                    b.Property<Guid>("PlayersId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("TournamentsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("PlayersId", "TournamentsId");
+
+                    b.HasIndex("TournamentsId");
+
+                    b.ToTable("PlayerTournament");
                 });
 
             modelBuilder.Entity("Challengers.Domain.Entities.FemalePlayer", b =>
@@ -169,9 +188,25 @@ namespace Challengers.Infrastructure.Migrations
                 {
                     b.HasOne("Challengers.Domain.Entities.Player", "Winner")
                         .WithMany()
-                        .HasForeignKey("WinnerId");
+                        .HasForeignKey("WinnerId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Winner");
+                });
+
+            modelBuilder.Entity("PlayerTournament", b =>
+                {
+                    b.HasOne("Challengers.Domain.Entities.Player", null)
+                        .WithMany()
+                        .HasForeignKey("PlayersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Challengers.Domain.Entities.Tournament", null)
+                        .WithMany()
+                        .HasForeignKey("TournamentsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Challengers.Domain.Entities.Tournament", b =>
