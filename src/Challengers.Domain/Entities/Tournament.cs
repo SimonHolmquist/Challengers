@@ -1,38 +1,45 @@
 ﻿using Challengers.Domain.Enums;
+using Challengers.Shared.Helpers;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Challengers.Domain.Entities;
 
 public class Tournament
 {
     public Guid Id { get; private set; } = Guid.NewGuid();
-
-    public string Name { get; private set; }
+    public string Name { get; private set; } = default!;
     public Gender Gender { get; private set; }
     public DateTime CreatedAt { get; private set; } = DateTime.UtcNow;
-    private readonly List<Player> _players = [];
-    public IReadOnlyCollection<Player> Players => _players.AsReadOnly();
 
-    private readonly List<Match> _matches = [];
-    public IReadOnlyCollection<Match> Matches => _matches.AsReadOnly();
+    public List<Player> Players { get; private set; } = [];
+    public List<Match> Matches { get; private set; } = [];
 
+    public Guid? WinnerId { get; private set; }
     public Player? Winner { get; private set; }
 
+    [Column("IsCompleted")]
+    public bool IsCompleted
+    {
+        get => _isCompleted;
+        private set => _isCompleted = value;
+    }
     private bool _isCompleted = false;
 
+    private Tournament() { }
     public Tournament(string name, Gender gender, IList<Player> players)
     {
         if (string.IsNullOrWhiteSpace(name))
             throw new ArgumentException(GetMessage(TournamentNameRequired), nameof(name));
 
         if (gender != Gender.Male && gender != Gender.Female)
-            throw new ArgumentException(GetMessage(TournamentGenderInvalid));
+            throw new ArgumentException(ErrorMessages.InvalidGender());
 
         if (players is null || players.Count < MinPlayers || !IsPowerOfTwo(players.Count))
             throw new ArgumentException(GetMessage(TournamentInvalidPlayerCount), nameof(players));
 
         Name = name;
         Gender = gender;
-        _players.AddRange(players);
+        Players.AddRange(players);
 
     }
 
@@ -41,22 +48,24 @@ public class Tournament
         if (_isCompleted)
             throw new InvalidOperationException(GetMessage(TournamentAlreadyCompleted));
 
-        if (_players.Count < MinPlayers || !IsPowerOfTwo(_players.Count))
+        if (Players.Count < MinPlayers || !IsPowerOfTwo(Players.Count))
             throw new ArgumentException(GetMessage(TournamentInvalidPlayerCount));
 
         rng ??= new Random();
-        var queue = new Queue<Player>(_players);
+        var queue = new Queue<Player>(Players);
 
         while (queue.Count > 1)
         {
             var match = new Match(queue.Dequeue(), queue.Dequeue());
+            match.SetTournament(this);
             match.Simulate(rng);
-            _matches.Add(match);
+            Matches.Add(match);
             queue.Enqueue(match.Winner!);
         }
 
         Winner = queue.Dequeue();
-        _isCompleted = true;
+        WinnerId = Winner.Id;
+        _isCompleted = !_isCompleted;
     }
 
     private static bool IsPowerOfTwo(int value) => value > 0 && (value & (value - 1)) == 0;
