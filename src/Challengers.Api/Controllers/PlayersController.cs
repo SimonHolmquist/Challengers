@@ -1,81 +1,54 @@
 ﻿using Challengers.Application.DTOs;
-using Challengers.Application.Interfaces.Persistence;
-using Challengers.Domain.Entities;
-using Challengers.Shared.Helpers;
+using Challengers.Application.Features.Players.Commands.CreatePlayer;
+using Challengers.Application.Features.Players.Commands.DeletePlayer;
+using Challengers.Application.Features.Players.Commands.UpdatePlayer;
+using Challengers.Application.Features.Players.Queries.GetPlayerById;
+using Challengers.Application.Features.Players.Queries.GetPlayers;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Challengers.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class PlayersController(IPlayerRepository playerRepository) : ControllerBase
+public class PlayersController(IMediator mediator) : ControllerBase
 {
-    private readonly IPlayerRepository _playerRepository = playerRepository;
+    private readonly IMediator _mediator = mediator;
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Player>> GetById(Guid id, CancellationToken cancellationToken)
+    public async Task<ActionResult<PlayerDto>> Get(Guid id, CancellationToken cancellationToken)
     {
-        var player = await _playerRepository.GetByIdAsync(id, cancellationToken);
-        return player is null ? NotFound() : Ok(player);
+        var result = await _mediator.Send(new GetPlayerByIdQuery(id), cancellationToken);
+        return Ok(result);
     }
 
     [HttpPost]
-    public async Task<ActionResult<Guid>> Create(PlayerDto dto, CancellationToken cancellationToken)
+    public async Task<ActionResult<Guid>> Create([FromBody] CreatePlayerRequestDto dto, CancellationToken cancellationToken)
     {
-        Player player;
-
-        if (dto.ReactionTime is not null)
-        {
-            player = new FemalePlayer(dto.Name!, dto.Skill!.Value, dto.ReactionTime.Value);
-        }
-        else
-        {
-            player = new MalePlayer(dto.Name!, dto.Skill!.Value, dto.Strength!.Value, dto.Speed!.Value);
-        }
-
-
-        await _playerRepository.AddAsync(player, cancellationToken);
-        await _playerRepository.SaveChangesAsync(cancellationToken);
-
-        return CreatedAtAction(nameof(GetById), new { id = player.Id }, player.Id);
+        var id = await _mediator.Send(new CreatePlayerCommand(dto), cancellationToken);
+        return CreatedAtAction(nameof(Get), new { id }, id);
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(Guid id, PlayerDto dto, CancellationToken cancellationToken)
+    public async Task<IActionResult> Update(Guid id, [FromBody] UpdatePlayerRequestDto dto, CancellationToken cancellationToken)
     {
-        var player = await _playerRepository.GetByIdAsync(id, cancellationToken);
-        if (player is null) return NotFound();
-
-        if (player is MalePlayer male)
-        {
-            if (dto.Name is not null) male.SetName(dto.Name);
-            if (dto.Skill is not null) male.SetSkill(dto.Skill.Value);
-            if (dto.Strength is not null) male.SetStrength(dto.Strength.Value);
-            if (dto.Speed is not null) male.SetSpeed(dto.Speed.Value);
-        }
-        else if (player is FemalePlayer female)
-        {
-            if (dto.Name is not null) female.SetName(dto.Name);
-            if (dto.Skill is not null) female.SetSkill(dto.Skill.Value);
-            if (dto.ReactionTime is not null) female.SetReactionTime(dto.ReactionTime.Value);
-        }
-        else
-            return BadRequest(ErrorMessages.InvalidGender());
-
-        await _playerRepository.SaveChangesAsync(cancellationToken);
-
+        await _mediator.Send(new UpdatePlayerCommand(id, dto), cancellationToken);
         return NoContent();
     }
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken)
     {
-        var player = await _playerRepository.GetByIdAsync(id, cancellationToken);
-        if (player is null) return NotFound();
-
-        _playerRepository.Delete(player);
-        await _playerRepository.SaveChangesAsync(cancellationToken);
-
+        await _mediator.Send(new DeletePlayerCommand(id), cancellationToken);
         return NoContent();
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<PagedResultDto<PlayerDto>>> GetAll(
+        [FromQuery] GetPlayersQueryDto dto,
+        CancellationToken cancellationToken)
+    {
+        var result = await _mediator.Send(new GetPlayersQuery(dto), cancellationToken);
+        return Ok(result);
     }
 }

@@ -3,5 +3,4 @@ using MediatR;
 
 namespace Challengers.Application.Features.Tournaments.Queries.GetTournamentsByFilter;
 
-public record GetTournamentsByFilterQuery(DateOnly? Date, string? Gender)
-    : IRequest<List<TournamentResultDto>>;
+public record GetTournamentsByFilterQuery(GetTournamentsQueryDto Dto) : IRequest<List<TournamentResultDto>>;

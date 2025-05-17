@@ -1,6 +1,4 @@
 ﻿using Challengers.Application.DTOs;
-using Challengers.Application.Extensions;
-using Challengers.Application.Helpers;
 using Challengers.Application.Interfaces.Persistence;
 using MediatR;
 
@@ -13,27 +11,16 @@ public class GetTournamentsByFilterHandler(ITournamentRepository repository)
 
     public async Task<List<TournamentResultDto>> Handle(GetTournamentsByFilterQuery request, CancellationToken cancellationToken)
     {
-        var tournaments = await _repository.GetAllWithDetailsAsync(cancellationToken);
-
-        if (request.Date is not null)
-        {
-            var date = request.Date.Value;
-            tournaments = [.. tournaments.Where(t => DateOnly.FromDateTime(t.CreatedAt) == date)];
-        }
-
-        if (!string.IsNullOrWhiteSpace(request.Gender) &&
-            GenderParser.TryParse(request.Gender, out var gender))
-        {
-            tournaments = [.. tournaments.Where(t => t.Gender == gender)];
-        }
+        var tournaments = await _repository.GetFilteredAsync(request.Dto, cancellationToken);
 
         return [.. tournaments.Select(t => new TournamentResultDto
         {
             Id = t.Id,
             Name = t.Name,
-            Gender = t.Gender.ToLocalizedString(),
+            Gender = t.Gender,
             CreatedAt = t.CreatedAt,
-            Winner = t.Winner?.Name ?? string.Empty
+            Winner = t.Winner?.GetFullName() ?? "-"
         })];
+
     }
 }

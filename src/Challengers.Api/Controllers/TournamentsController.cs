@@ -36,9 +36,12 @@ public class TournamentsController(IMediator mediator) : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<TournamentResultDto>>> GetAll([FromQuery] DateOnly? date, [FromQuery] string? gender, CancellationToken cancellationToken)
+    public async Task<ActionResult<List<TournamentResultDto>>> GetAll(
+    [FromQuery] GetTournamentsQueryDto dto,
+    CancellationToken cancellationToken)
     {
-        var result = await _mediator.Send(new GetTournamentsByFilterQuery(date, gender), cancellationToken);
+        var result = await _mediator.Send(new GetTournamentsByFilterQuery(dto), cancellationToken);
         return Ok(result);
     }
+
 }

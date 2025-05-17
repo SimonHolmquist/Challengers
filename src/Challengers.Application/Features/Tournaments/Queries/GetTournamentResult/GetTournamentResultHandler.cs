@@ -1,5 +1,4 @@
 ﻿using Challengers.Application.DTOs;
-using Challengers.Application.Extensions;
 using Challengers.Application.Interfaces.Persistence;
 using MediatR;
 
@@ -21,9 +20,9 @@ public class GetTournamentResultHandler(
         {
             Id = tournament.Id,
             Name = tournament.Name,
-            Gender = tournament.Gender.ToLocalizedString(),
+            Gender = tournament.Gender,
             CreatedAt = tournament.CreatedAt,
-            Winner = tournament.Winner?.Name ?? string.Empty
+            Winner = tournament.Winner?.GetFullName() ?? string.Empty
         };
     }
 }
