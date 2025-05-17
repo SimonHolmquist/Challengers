@@ -139,7 +139,7 @@
     <value>{0} * {1} (skill) + {2} * {3} (reaction time) + {4} * {5} (luck) = {6} total score</value>
   </data>
   <data name="InvalidGender" xml:space="preserve">
-    <value> Invalid gender. Must be '{0}' or '{1}'.</value>
+    <value>Invalid gender. Must be '{0}' or '{1}'.</value>
   </data>
   <data name="Gender_Male" xml:space="preserve">
     <value>Male</value>
@@ -157,10 +157,10 @@
     <value>The match has already been simulated.</value>
   </data>
   <data name="TournamentNameRequired" xml:space="preserve">
-    <value> Tournament name is required.</value>
+    <value>Tournament name is required.</value>
   </data>
   <data name="TournamentAlreadyCompleted" xml:space="preserve">
-    <value> The tournament has already been completed.</value>
+    <value>The tournament has already been completed.</value>
   </data>
   <data name="TournamentInvalidPlayerCount" xml:space="preserve">
     <value>The number of players must be a power of two and non-zero.</value>
@@ -176,5 +176,74 @@
   </data>
   <data name="PlayerIdNotFound" xml:space="preserve">
     <value>Player with ID {0} not found.</value>
+  </data>
+  <data name="ValidationFailedMessage" xml:space="preserve">
+    <value>Validation failed.</value>
+  </data>
+  <data name="NotFoundMessage" xml:space="preserve">
+    <value>Resource not found.</value>
+  </data>
+  <data name="InternalServerErrorMessage" xml:space="preserve">
+    <value>Internal server error.</value>
+  </data>
+  <data name="InvalidPlayerData" xml:space="preserve">
+    <value>Invalid player data.</value>
+  </data>
+  <data name="StrengthNotAllowedForFemale" xml:space="preserve">
+    <value>Female players must not have strength.</value>
+  </data>
+  <data name="SpeedNotAllowedForFemale" xml:space="preserve">
+    <value>Female players must not have speed.</value>
+  </data>
+  <data name="StrengthRequiredForMale" xml:space="preserve">
+    <value>Strength is required for male players.</value>
+  </data>
+  <data name="SpeedRequiredForMale" xml:space="preserve">
+    <value>Speed is required for male players.</value>
+  </data>
+  <data name="MixedGenderAttributes" xml:space="preserve">
+    <value>A player cannot have both reaction time and strength/speed.</value>
+  </data>
+  <data name="SurnameRequired" xml:space="preserve">
+    <value>Player surname is required.</value>
+  </data>
+  <data name="SurnameTooLong" xml:space="preserve">
+    <value>Player surname must be at most {0} characters.</value>
+  </data>
+  <data name="NameTooLong" xml:space="preserve">
+    <value>Player name must be at most {0} characters.</value>
+  </data>
+  <data name="PlayerIdRequired" xml:space="preserve">
+    <value>Player ID is required when referencing an existing player.</value>
+  </data>
+  <data name="ReactionTimeRequired" xml:space="preserve">
+    <value>Reaction time is required for female players.</value>
+  </data>
+  <data name="ReactionTimeNotAllowedForMale" xml:space="preserve">
+    <value>Reaction time is not allowed for male players.</value>
+  </data>
+  <data name="TournamentNameTooLong" xml:space="preserve">
+    <value>Tournament name must be at most {0} characters.</value>
+  </data>
+  <data name="TournamentPlayersEmpty" xml:space="preserve">
+    <value>Players list cannot be empty.</value>
+  </data>
+  <data name="PlayerReferenceInvalid" xml:space="preserve">
+    <value>Either Player ID or full player data required.</value>
+  </data>
+  <data name="SkillRequired" xml:space="preserve">
+    <value>Skill is required for new players.</value>
+  </data>
+  <data name="TournamentAlreadyExists" xml:space="preserve">
+    <value>A tournament named '{0}' already exists.</value>
+  </data>
+  <data name="DuplicatedPlayerInTournament" xml:space="preserve">
+    <value>A player cannot participate more than once in a tournament.</value>
+  </data>
+  <data name="TournamentPlayersGenderMismatch" xml:space="preserve">
+    <value>The following players do not match the tournament gender '{0}': {1}.</value>
+  </data>
+  <data name="TournamentGenderRequired" xml:space="preserve">
+    <value>Tournament gender is required.</value>
   </data>
 </root>
