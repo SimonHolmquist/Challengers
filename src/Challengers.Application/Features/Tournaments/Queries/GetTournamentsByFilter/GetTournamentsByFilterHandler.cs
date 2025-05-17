@@ -13,7 +13,7 @@ public class GetTournamentsByFilterHandler(ITournamentRepository repository)
 
     public async Task<List<TournamentResultDto>> Handle(GetTournamentsByFilterQuery request, CancellationToken cancellationToken)
     {
-        var tournaments = await _repository.GetAllAsync(cancellationToken);
+        var tournaments = await _repository.GetAllWithDetailsAsync(cancellationToken);
 
         if (request.Date is not null)
         {

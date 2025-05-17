@@ -11,6 +11,15 @@ public class TournamentRepository(ChallengersDbContext context) : Repository<Tou
         return await _context.Tournaments
             .Include(t => t.Players)
             .Include(t => t.Matches)
+            .Include(t => t.Winner)
             .FirstOrDefaultAsync(t => t.Id == id, cancellationToken);
+    }
+    public async Task<List<Tournament>> GetAllWithDetailsAsync(CancellationToken cancellationToken = default)
+    {
+        return await _context.Tournaments
+            .Include(t => t.Players)
+            .Include(t => t.Matches)
+            .Include(t => t.Winner)
+            .ToListAsync(cancellationToken);
     }
 }

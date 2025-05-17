@@ -1,8 +1,6 @@
 ﻿using Challengers.Application.DTOs;
 using Challengers.Application.Extensions;
 using Challengers.Application.Interfaces.Persistence;
-using Challengers.Shared.Helpers;
-using Challengers.Shared.Resources;
 using MediatR;
 
 namespace Challengers.Application.Features.Tournaments.Queries.GetTournamentResult;
