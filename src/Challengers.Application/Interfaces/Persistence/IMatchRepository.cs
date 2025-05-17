@@ -3,4 +3,6 @@ using Challengers.Shared.Interfaces.Persistence;
 
 namespace Challengers.Application.Interfaces.Persistence;
 
-public interface IMatchRepository : IRepository<Match> { }
+public interface IMatchRepository : IRepository<Match>
+{
+}

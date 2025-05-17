@@ -61,6 +61,15 @@ namespace Challengers.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A player cannot participate more than once in a tournament..
+        /// </summary>
+        internal static string DuplicatedPlayerInTournament {
+            get {
+                return ResourceManager.GetString("DuplicatedPlayerInTournament", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} * {1} (skill) + {2} * {3} (reaction time) + {4} * {5} (luck) = {6} total score.
         /// </summary>
         internal static string FemaleScoreExplanation {
@@ -97,11 +106,29 @@ namespace Challengers.Shared.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  Invalid gender. Must be &apos;{0}&apos; or &apos;{1}&apos;..
+        ///   Looks up a localized string similar to Internal server error..
+        /// </summary>
+        internal static string InternalServerErrorMessage {
+            get {
+                return ResourceManager.GetString("InternalServerErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid gender. Must be &apos;{0}&apos; or &apos;{1}&apos;..
         /// </summary>
         internal static string InvalidGender {
             get {
                 return ResourceManager.GetString("InvalidGender", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid player data..
+        /// </summary>
+        internal static string InvalidPlayerData {
+            get {
+                return ResourceManager.GetString("InvalidPlayerData", resourceCulture);
             }
         }
         
@@ -142,11 +169,65 @@ namespace Challengers.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A player cannot have both reaction time and strength/speed..
+        /// </summary>
+        internal static string MixedGenderAttributes {
+            get {
+                return ResourceManager.GetString("MixedGenderAttributes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name cannot be empty..
         /// </summary>
         internal static string NameRequired {
             get {
                 return ResourceManager.GetString("NameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Player name must be at most {0} characters..
+        /// </summary>
+        internal static string NameTooLong {
+            get {
+                return ResourceManager.GetString("NameTooLong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resource not found..
+        /// </summary>
+        internal static string NotFoundMessage {
+            get {
+                return ResourceManager.GetString("NotFoundMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Player with ID {0} not found..
+        /// </summary>
+        internal static string PlayerIdNotFound {
+            get {
+                return ResourceManager.GetString("PlayerIdNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Player ID is required when referencing an existing player..
+        /// </summary>
+        internal static string PlayerIdRequired {
+            get {
+                return ResourceManager.GetString("PlayerIdRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Either Player ID or full player data required..
+        /// </summary>
+        internal static string PlayerReferenceInvalid {
+            get {
+                return ResourceManager.GetString("PlayerReferenceInvalid", resourceCulture);
             }
         }
         
@@ -160,11 +241,47 @@ namespace Challengers.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reaction time is not allowed for male players..
+        /// </summary>
+        internal static string ReactionTimeNotAllowedForMale {
+            get {
+                return ResourceManager.GetString("ReactionTimeNotAllowedForMale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reaction time is required for female players..
+        /// </summary>
+        internal static string ReactionTimeRequired {
+            get {
+                return ResourceManager.GetString("ReactionTimeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Skill must be between {0} and {1}..
         /// </summary>
         internal static string SkillOutOfRange {
             get {
                 return ResourceManager.GetString("SkillOutOfRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Skill is required for new players..
+        /// </summary>
+        internal static string SkillRequired {
+            get {
+                return ResourceManager.GetString("SkillRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Female players must not have speed..
+        /// </summary>
+        internal static string SpeedNotAllowedForFemale {
+            get {
+                return ResourceManager.GetString("SpeedNotAllowedForFemale", resourceCulture);
             }
         }
         
@@ -178,6 +295,24 @@ namespace Challengers.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Speed is required for male players..
+        /// </summary>
+        internal static string SpeedRequiredForMale {
+            get {
+                return ResourceManager.GetString("SpeedRequiredForMale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Female players must not have strength..
+        /// </summary>
+        internal static string StrengthNotAllowedForFemale {
+            get {
+                return ResourceManager.GetString("StrengthNotAllowedForFemale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Strength must be between {0} and {1}..
         /// </summary>
         internal static string StrengthOutOfRange {
@@ -187,11 +322,47 @@ namespace Challengers.Shared.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  The tournament has already been completed..
+        ///   Looks up a localized string similar to Strength is required for male players..
+        /// </summary>
+        internal static string StrengthRequiredForMale {
+            get {
+                return ResourceManager.GetString("StrengthRequiredForMale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Player surname is required..
+        /// </summary>
+        internal static string SurnameRequired {
+            get {
+                return ResourceManager.GetString("SurnameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Player surname must be at most {0} characters..
+        /// </summary>
+        internal static string SurnameTooLong {
+            get {
+                return ResourceManager.GetString("SurnameTooLong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The tournament has already been completed..
         /// </summary>
         internal static string TournamentAlreadyCompleted {
             get {
                 return ResourceManager.GetString("TournamentAlreadyCompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A tournament named &apos;{0}&apos; already exists..
+        /// </summary>
+        internal static string TournamentAlreadyExists {
+            get {
+                return ResourceManager.GetString("TournamentAlreadyExists", resourceCulture);
             }
         }
         
@@ -205,6 +376,15 @@ namespace Challengers.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tournament gender is required..
+        /// </summary>
+        internal static string TournamentGenderRequired {
+            get {
+                return ResourceManager.GetString("TournamentGenderRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The number of players must be a power of two and non-zero..
         /// </summary>
         internal static string TournamentInvalidPlayerCount {
@@ -214,11 +394,20 @@ namespace Challengers.Shared.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  Tournament name is required..
+        ///   Looks up a localized string similar to Tournament name is required..
         /// </summary>
         internal static string TournamentNameRequired {
             get {
                 return ResourceManager.GetString("TournamentNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tournament name must be at most {0} characters..
+        /// </summary>
+        internal static string TournamentNameTooLong {
+            get {
+                return ResourceManager.GetString("TournamentNameTooLong", resourceCulture);
             }
         }
         
@@ -228,6 +417,33 @@ namespace Challengers.Shared.Resources {
         internal static string TournamentNotFound {
             get {
                 return ResourceManager.GetString("TournamentNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Players list cannot be empty..
+        /// </summary>
+        internal static string TournamentPlayersEmpty {
+            get {
+                return ResourceManager.GetString("TournamentPlayersEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The following players do not match the tournament gender &apos;{0}&apos;: {1}..
+        /// </summary>
+        internal static string TournamentPlayersGenderMismatch {
+            get {
+                return ResourceManager.GetString("TournamentPlayersGenderMismatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Validation failed..
+        /// </summary>
+        internal static string ValidationFailedMessage {
+            get {
+                return ResourceManager.GetString("ValidationFailedMessage", resourceCulture);
             }
         }
     }

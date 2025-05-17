@@ -1,9 +1,5 @@
 ﻿using Challengers.Application.DTOs;
 using Challengers.Application.Interfaces.Persistence;
-using Challengers.Domain.Enums;
-using Challengers.Shared.Extensions;
-using Challengers.Shared.Helpers;
-using Challengers.Shared.Resources;
 using MediatR;
 
 namespace Challengers.Application.Features.Tournaments.Queries.GetTournamentResult;
@@ -18,16 +14,15 @@ public class GetTournamentResultHandler(
     {
         var tournament = await _tournamentRepository.GetWithDetailsAsync(request.TournamentId, cancellationToken);
 
-        if (tournament is null)
-            throw new KeyNotFoundException(LocalizedMessages.GetMessage(MessageKeys.TournamentNotFound));
-
-        return new TournamentResultDto
+        return tournament is null
+            ? throw new KeyNotFoundException(GetMessage(TournamentNotFound))
+            : new TournamentResultDto
         {
             Id = tournament.Id,
             Name = tournament.Name,
-            Gender = tournament.Gender.ToLocalizedString(),
+            Gender = tournament.Gender,
             CreatedAt = tournament.CreatedAt,
-            Winner = tournament.Winner?.Name ?? string.Empty
+            Winner = tournament.Winner?.GetFullName() ?? string.Empty
         };
     }
 }

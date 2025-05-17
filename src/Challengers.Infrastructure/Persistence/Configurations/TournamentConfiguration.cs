@@ -1,6 +1,4 @@
-﻿// src/Challengers.Infrastructure/Persistence/Configurations/TournamentConfiguration.cs
-
-using Challengers.Domain.Constants;
+﻿using Challengers.Domain.Constants;
 using Challengers.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -15,11 +13,10 @@ public class TournamentConfiguration : IEntityTypeConfiguration<Tournament>
 
         builder.Property(t => t.Name)
             .IsRequired()
-            .HasMaxLength(ValidationRules.TournamentNameMaxLength);
+            .HasMaxLength(TournamentConstants.TournamentNameMaxLength);
 
         builder.Property(t => t.Gender)
-            .IsRequired()
-            .HasConversion<string>();
+            .IsRequired();
 
         builder.Property(t => t.CreatedAt)
             .IsRequired()
@@ -29,5 +26,18 @@ public class TournamentConfiguration : IEntityTypeConfiguration<Tournament>
             .WithOne(m => m.Tournament)
             .HasForeignKey(m => m.TournamentId)
             .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasMany(t => t.Players)
+            .WithMany(p => p.Tournaments);
+
+        builder.HasOne(t => t.Winner)
+            .WithMany()
+            .HasForeignKey(t => t.WinnerId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.Property(t => t.IsCompleted)
+            .HasColumnName("IsCompleted")
+            .IsRequired();
+
     }
 }

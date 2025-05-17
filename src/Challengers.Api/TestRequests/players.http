@@ -1,0 +1,45 @@
+# Crear jugador femenino
+POST http://localhost:5000/api/players
+Content-Type: application/json
+
+{
+  "name": "Martina",
+  "skill": 90,
+  "reactionTime": 95
+}
+
+###
+
+# Crear jugador masculino
+POST http://localhost:5000/api/players
+Content-Type: application/json
+
+{
+  "name": "Federico",
+  "skill": 92,
+  "strength": 88,
+  "speed": 86
+}
+
+###
+
+# Obtener jugador (reemplazar ID real)
+GET http://localhost:5000/api/players/{{playerId}}
+
+###
+
+# Actualizar jugador
+PUT http://localhost:5000/api/players/{{playerId}}
+Content-Type: application/json
+
+{
+  "name": "Fede actualizado",
+  "skill": 95,
+  "strength": 90,
+  "speed": 90
+}
+
+###
+
+# Eliminar jugador
+DELETE http://localhost:5000/api/players/{{playerId}}

@@ -6,8 +6,8 @@ public class FemalePlayer : Player
 {
     public int ReactionTime { get; private set; }
 
-    public FemalePlayer(string name, int skill, int reactionTime)
-        : base(name, skill, Gender.Female)
+    public FemalePlayer(string name, string surname, int skill, int reactionTime)
+        : base(name, surname, skill, Gender.Female)
     {
         if (reactionTime is < MinStat or > MaxStat)
             throw new ArgumentOutOfRangeException(
@@ -34,5 +34,6 @@ public class FemalePlayer : Player
             score
         );
     }
+    public void SetReactionTime(int value) => ReactionTime = value;
 
 }

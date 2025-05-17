@@ -1,11 +1,11 @@
-﻿namespace Challengers.Domain.Entities;
+﻿using Challengers.Domain.Common;
 
-public class Match
+namespace Challengers.Domain.Entities;
+
+public class Match : Entity<Guid>
 {
-    public Guid Id { get; private set; } = Guid.NewGuid();
-
     public Guid TournamentId { get; private set; }
-    public Tournament Tournament { get; private set; } = default!;
+    public Tournament Tournament { get; private set; } = null!;
 
     public Guid Player1Id { get; private set; }
     public Player Player1 { get; private set; } = default!;
@@ -32,6 +32,12 @@ public class Match
             throw new ArgumentException(MatchSamePlayer);
     }
 
+    public void SetTournament(Tournament tournament)
+    {
+        Tournament = tournament ?? throw new ArgumentNullException(nameof(tournament));
+        TournamentId = tournament.Id;
+    }
+
     public void Simulate(Random? rng = null)
     {
         if (_isSimulated)
@@ -39,8 +45,8 @@ public class Match
 
         rng ??= new Random();
 
-        var luck1 = Player1.GenerateLuck(rng);
-        var luck2 = Player2.GenerateLuck(rng);
+        var luck1 = Player.GenerateLuck(rng);
+        var luck2 = Player.GenerateLuck(rng);
 
         var score1 = Player1.GetMatchScore(luck1);
         var score2 = Player2.GetMatchScore(luck2);

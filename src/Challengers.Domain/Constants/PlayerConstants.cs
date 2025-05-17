@@ -2,6 +2,8 @@
 
 public static class PlayerConstants
 {
+    public const int MaxNameLength = 50;
+    public const int MaxSurnameLength = 50;
     public const int MinStat = 0;
     public const int MaxStat = 100;
 
@@ -16,4 +18,7 @@ public static class PlayerConstants
     public const double FemaleReactionTimeWeight = 0.3;
     public const double LuckWeight = 1.0;
     public const int LuckRangeAdjustment = 1;
+
+    public const int DefaultPage = 1;
+    public const int DefaultPageSize = 20;
 }

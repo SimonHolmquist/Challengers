@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Challengers.Infrastructure.Migrations
 {
     [DbContext(typeof(ChallengersDbContext))]
-    [Migration("20250516181022_InitialCreate")]
+    [Migration("20250517221837_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -30,6 +30,12 @@ namespace Challengers.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid>("Player1Id")
                         .HasColumnType("uniqueidentifier");
@@ -62,16 +68,27 @@ namespace Challengers.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("Skill")
                         .HasColumnType("int");
+
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -92,9 +109,15 @@ namespace Challengers.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(48)");
 
-                    b.Property<string>("Gender")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("bit")
+                        .HasColumnName("IsCompleted");
+
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -109,6 +132,21 @@ namespace Challengers.Infrastructure.Migrations
                     b.HasIndex("WinnerId");
 
                     b.ToTable("Tournaments");
+                });
+
+            modelBuilder.Entity("PlayerTournament", b =>
+                {
+                    b.Property<Guid>("PlayersId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("TournamentsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("PlayersId", "TournamentsId");
+
+                    b.HasIndex("TournamentsId");
+
+                    b.ToTable("PlayerTournament");
                 });
 
             modelBuilder.Entity("Challengers.Domain.Entities.FemalePlayer", b =>
@@ -172,9 +210,25 @@ namespace Challengers.Infrastructure.Migrations
                 {
                     b.HasOne("Challengers.Domain.Entities.Player", "Winner")
                         .WithMany()
-                        .HasForeignKey("WinnerId");
+                        .HasForeignKey("WinnerId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Winner");
+                });
+
+            modelBuilder.Entity("PlayerTournament", b =>
+                {
+                    b.HasOne("Challengers.Domain.Entities.Player", null)
+                        .WithMany()
+                        .HasForeignKey("PlayersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Challengers.Domain.Entities.Tournament", null)
+                        .WithMany()
+                        .HasForeignKey("TournamentsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Challengers.Domain.Entities.Tournament", b =>

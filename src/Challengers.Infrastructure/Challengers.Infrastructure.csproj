@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <ProjectReference Include="..\Challengers.Application\Challengers.Application.csproj" />
     <ProjectReference Include="..\Challengers.Domain\Challengers.Domain.csproj" />
     <ProjectReference Include="..\Challengers.Shared\Challengers.Shared.csproj" />
   </ItemGroup>

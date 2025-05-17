@@ -174,4 +174,76 @@
   <data name="TournamentNotFound" xml:space="preserve">
     <value>Torneo no encontrado.</value>
   </data>
+  <data name="PlayerIdNotFound" xml:space="preserve">
+    <value>Jugador con ID {0} no encontrado.</value>
+  </data>
+  <data name="ValidationFailedMessage" xml:space="preserve">
+    <value>La validación falló.</value>
+  </data>
+  <data name="NotFoundMessage" xml:space="preserve">
+    <value>Recurso no encontrado.</value>
+  </data>
+  <data name="InternalServerErrorMessage" xml:space="preserve">
+    <value>Error Interno del Servidor.</value>
+  </data>
+  <data name="InvalidPlayerData" xml:space="preserve">
+    <value>Datos de jugador no válidos.</value>
+  </data>
+  <data name="StrengthNotAllowedForFemale" xml:space="preserve">
+    <value>Las jugadoras no deben tener fuerza.</value>
+  </data>
+  <data name="SpeedNotAllowedForFemale" xml:space="preserve">
+    <value>Las jugadoras no deben tener velocidad.</value>
+  </data>
+  <data name="StrengthRequiredForMale" xml:space="preserve">
+    <value>Se requiere fuerza para los jugadores masculinos.</value>
+  </data>
+  <data name="SpeedRequiredForMale" xml:space="preserve">
+    <value>Se requiere velocidad para los jugadores masculinos.</value>
+  </data>
+  <data name="MixedGenderAttributes" xml:space="preserve">
+    <value>Un jugador no puede tener tiempo de reacción y fuerza/velocidad.</value>
+  </data>
+  <data name="SurnameRequired" xml:space="preserve">
+    <value>Se requiere el apellido del jugador.</value>
+  </data>
+  <data name="SurnameTooLong" xml:space="preserve">
+    <value>El apellido del jugador debe tener como máximo {0} caracteres.</value>
+  </data>
+  <data name="NameTooLong" xml:space="preserve">
+    <value>El nombre del jugador debe tener como máximo {0} caracteres.</value>
+  </data>
+  <data name="PlayerIdRequired" xml:space="preserve">
+    <value>Se requiere el ID del jugador cuando se hace referencia a un jugador existente.</value>
+  </data>
+  <data name="ReactionTimeRequired" xml:space="preserve">
+    <value>El tiempo de reacción es obligatorio para jugadoras.</value>
+  </data>
+  <data name="ReactionTimeNotAllowedForMale" xml:space="preserve">
+    <value>El tiempo de reacción no está permitido para jugadores.</value>
+  </data>
+  <data name="TournamentNameTooLong" xml:space="preserve">
+    <value>El nombre del torneo debe tener como máximo {0} caracteres.</value>
+  </data>
+  <data name="TournamentPlayersEmpty" xml:space="preserve">
+    <value>La lista de jugadores no puede estar vacía.</value>
+  </data>
+  <data name="PlayerReferenceInvalid" xml:space="preserve">
+    <value>Se requiere ID del jugador o sus datos completos.</value>
+  </data>
+  <data name="SkillRequired" xml:space="preserve">
+    <value>La habilidad es obligatoria para jugadores nuevos.</value>
+  </data>
+  <data name="TournamentAlreadyExists" xml:space="preserve">
+    <value>Ya existe un torneo llamado '{0}'.</value>
+  </data>
+  <data name="DuplicatedPlayerInTournament" xml:space="preserve">
+    <value>Un jugador no puede participar más de una vez en un torneo.</value>
+  </data>
+  <data name="TournamentPlayersGenderMismatch" xml:space="preserve">
+    <value>Los siguientes jugadores no coinciden con el género del torneo '{0}': {1}.</value>
+  </data>
+  <data name="TournamentGenderRequired" xml:space="preserve">
+    <value />
+  </data>
 </root>

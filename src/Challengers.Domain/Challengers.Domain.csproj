@@ -7,12 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Common\**" />
-    <EmbeddedResource Remove="Common\**" />
-    <None Remove="Common\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Challengers.Shared\Challengers.Shared.csproj" />
   </ItemGroup>
 

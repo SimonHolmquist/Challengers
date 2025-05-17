@@ -12,7 +12,8 @@ public class MatchConfiguration : IEntityTypeConfiguration<Match>
 
         builder.HasOne(m => m.Tournament)
             .WithMany(t => t.Matches)
-            .HasForeignKey(m => m.TournamentId);
+            .HasForeignKey(m => m.TournamentId)
+            .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasOne(m => m.Player1)
             .WithMany()

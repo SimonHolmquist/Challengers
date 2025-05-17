@@ -14,7 +14,11 @@ public class PlayerConfiguration : IEntityTypeConfiguration<Player>
 
         builder.Property(p => p.Name)
             .IsRequired()
-            .HasMaxLength(ValidationRules.PlayerNameMaxLength);
+            .HasMaxLength(PlayerConstants.MaxNameLength);
+
+        builder.Property(p => p.Surname)
+            .IsRequired()
+            .HasMaxLength(PlayerConstants.MaxSurnameLength);
 
         builder.Property(p => p.Skill)
             .IsRequired();
