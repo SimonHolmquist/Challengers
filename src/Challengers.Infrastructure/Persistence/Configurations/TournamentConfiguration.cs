@@ -13,11 +13,10 @@ public class TournamentConfiguration : IEntityTypeConfiguration<Tournament>
 
         builder.Property(t => t.Name)
             .IsRequired()
-            .HasMaxLength(ValidationRules.TournamentNameMaxLength);
+            .HasMaxLength(TournamentConstants.TournamentNameMaxLength);
 
         builder.Property(t => t.Gender)
-            .IsRequired()
-            .HasConversion<string>();
+            .IsRequired();
 
         builder.Property(t => t.CreatedAt)
             .IsRequired()
