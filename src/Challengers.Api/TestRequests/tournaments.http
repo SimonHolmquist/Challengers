@@ -1,0 +1,54 @@
+# Crear torneo con jugadores nuevos
+POST http://localhost:5000/api/tournaments
+Content-Type: application/json
+
+{
+  "name": "ATP Córdoba",
+  "gender": "masculino",
+  "savePlayers": true,
+  "players": [
+    {
+      "name": "Luciano",
+      "skill": 89,
+      "strength": 85,
+      "speed": 84
+    },
+    {
+      "name": "Franco",
+      "skill": 91,
+      "strength": 86,
+      "speed": 85
+    }
+  ]
+}
+
+###
+
+# Crear torneo con jugadores por ID
+POST http://localhost:5000/api/tournaments
+Content-Type: application/json
+
+{
+  "name": "WTA Córdoba",
+  "gender": "femenino",
+  "savePlayers": false,
+  "players": [
+    { "id": "{{femaleId1}}" },
+    { "id": "{{femaleId2}}" }
+  ]
+}
+
+###
+
+# Simular torneo
+PUT http://localhost:5000/api/tournaments/{{tournamentId}}/simulate
+
+###
+
+# Ver resultado de torneo
+GET http://localhost:5000/api/tournaments/{{tournamentId}}
+
+###
+
+# Filtrar torneos por fecha y género
+GET http://localhost:5000/api/tournaments?date=2024-05-18&gender=masculino
