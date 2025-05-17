@@ -1,4 +1,6 @@
-﻿namespace Challengers.Shared.Resources;
+﻿using System.Numerics;
+
+namespace Challengers.Shared.Resources;
 
 public static class MessageKeys
 {
@@ -26,4 +28,5 @@ public static class MessageKeys
     public const string MaleScoreExplanation = nameof(MaleScoreExplanation);
 
     public const string FormatError = nameof(FormatError);
+    public const string PlayerIdNotFound = nameof(PlayerIdNotFound);
 }

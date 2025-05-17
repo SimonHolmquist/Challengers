@@ -174,4 +174,7 @@
   <data name="TournamentNotFound" xml:space="preserve">
     <value>Torneo no encontrado.</value>
   </data>
+  <data name="PlayerIdNotFound" xml:space="preserve">
+    <value>Jugador con ID {0} no encontrado.</value>
+  </data>
 </root>

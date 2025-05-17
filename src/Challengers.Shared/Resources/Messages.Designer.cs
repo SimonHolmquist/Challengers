@@ -151,6 +151,15 @@ namespace Challengers.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Player with ID {0} not found..
+        /// </summary>
+        internal static string PlayerIdNotFound {
+            get {
+                return ResourceManager.GetString("PlayerIdNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reaction time must be between {0} and {1}..
         /// </summary>
         internal static string ReactionOutOfRange {
