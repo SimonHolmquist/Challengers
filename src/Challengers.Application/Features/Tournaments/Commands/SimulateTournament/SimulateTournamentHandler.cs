@@ -12,7 +12,7 @@ public class SimulateTournamentHandler(
 
     public async Task<SimulateTournamentResponseDto> Handle(SimulateTournamentCommand request, CancellationToken cancellationToken)
     {
-        var tournament = await _tournamentRepository.GetWithDetailsAsync(request.TournamentId, cancellationToken) ?? throw new KeyNotFoundException(GetMessage(TournamentNotFound));
+        var tournament = await _tournamentRepository.GetWithDetailsAsync(request.TournamentId, cancellationToken) ?? throw new KeyNotFoundException(FormatMessage(TournamentNotFound, request.TournamentId));
         
         if (tournament.Winner is not null || tournament.Matches.Count != 0)
         {

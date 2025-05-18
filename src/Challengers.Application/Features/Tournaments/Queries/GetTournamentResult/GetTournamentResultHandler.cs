@@ -15,7 +15,7 @@ public class GetTournamentResultHandler(
         var tournament = await _tournamentRepository.GetWithDetailsAsync(request.TournamentId, cancellationToken);
 
         return tournament is null
-            ? throw new KeyNotFoundException(GetMessage(TournamentNotFound))
+            ? throw new KeyNotFoundException(FormatMessage(TournamentNotFound, request.TournamentId))
             : new TournamentResultDto
         {
             Id = tournament.Id,
