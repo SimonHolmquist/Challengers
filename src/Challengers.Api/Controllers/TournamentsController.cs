@@ -4,6 +4,7 @@ using Challengers.Application.Features.Tournaments.Commands.SimulateTournament;
 using Challengers.Application.Features.Tournaments.Queries.GetTournamentResult;
 using Challengers.Application.Features.Tournaments.Queries.GetTournamentsByFilter;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Challengers.Api.Controllers;
@@ -28,6 +29,7 @@ public class TournamentsController(IMediator mediator) : ControllerBase
         return Ok(result);
     }
 
+    [AllowAnonymous]
     [HttpGet("{id}")]
     public async Task<ActionResult<TournamentResultDto>> GetById(Guid id, CancellationToken cancellationToken)
     {
@@ -35,6 +37,7 @@ public class TournamentsController(IMediator mediator) : ControllerBase
         return Ok(result);
     }
 
+    [AllowAnonymous]
     [HttpGet]
     public async Task<ActionResult<List<TournamentResultDto>>> GetAll(
     [FromQuery] GetTournamentsQueryDto dto,
@@ -43,5 +46,4 @@ public class TournamentsController(IMediator mediator) : ControllerBase
         var result = await _mediator.Send(new GetTournamentsByFilterQuery(dto), cancellationToken);
         return Ok(result);
     }
-
 }

@@ -5,6 +5,7 @@ using Challengers.Application.Features.Players.Commands.UpdatePlayer;
 using Challengers.Application.Features.Players.Queries.GetPlayerById;
 using Challengers.Application.Features.Players.Queries.GetPlayers;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Challengers.Api.Controllers;
@@ -14,7 +15,8 @@ namespace Challengers.Api.Controllers;
 public class PlayersController(IMediator mediator) : ControllerBase
 {
     private readonly IMediator _mediator = mediator;
-
+    
+    [AllowAnonymous]
     [HttpGet("{id}")]
     public async Task<ActionResult<PlayerDto>> Get(Guid id, CancellationToken cancellationToken)
     {
@@ -43,6 +45,7 @@ public class PlayersController(IMediator mediator) : ControllerBase
         return NoContent();
     }
 
+    [AllowAnonymous]
     [HttpGet]
     public async Task<ActionResult<PagedResultDto<PlayerDto>>> GetAll(
         [FromQuery] GetPlayersQueryDto dto,
