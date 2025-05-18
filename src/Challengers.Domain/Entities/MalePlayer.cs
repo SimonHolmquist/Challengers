@@ -1,4 +1,5 @@
 ﻿using Challengers.Domain.Enums;
+using System.Globalization;
 
 namespace Challengers.Domain.Entities;
 
@@ -24,7 +25,7 @@ public class MalePlayer : Player
         Speed = speed;
     }
 
-    protected override double CalculateScoreWithLuck(int luck)
+    protected override double CalculateScoreWithLuck(double luck)
     {
         return Skill * MaleSkillWeight +
                Strength * MaleStrengthWeight +
@@ -32,14 +33,14 @@ public class MalePlayer : Player
                luck * LuckWeight;
     }
 
-    public override string ExplainScore(double score, int luck)
+    public override string ExplainScore(double score, double luck)
     {
         return FormatMessage(
             MaleScoreExplanation,
             Skill, MaleSkillWeight,
             Strength, MaleStrengthWeight,
             Speed, MaleSpeedWeight,
-            luck, LuckWeight,
+            luck.ToString(CultureInfo.InvariantCulture), LuckWeight,
             score
         );
     }
