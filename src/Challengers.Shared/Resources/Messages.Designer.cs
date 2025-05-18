@@ -412,7 +412,7 @@ namespace Challengers.Shared.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tournament not found..
+        ///   Looks up a localized string similar to Tournament with ID {0} not found..
         /// </summary>
         internal static string TournamentNotFound {
             get {

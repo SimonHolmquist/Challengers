@@ -1,5 +1,6 @@
 using Challengers.Domain.Common;
 using Challengers.Domain.Enums;
+using Challengers.Domain.Services;
 
 namespace Challengers.Domain.Entities;
 
@@ -28,27 +29,20 @@ public abstract class Player : Entity<Guid>
         Gender = gender;
     }
 
-    public static int GenerateLuck(Random? rng)
+    public static double GenerateLuck(IRandomGenerator rng)
     {
-        rng ??= new Random();
-        return rng.Next(MinLuck, MaxLuck + LuckRangeAdjustment);
+        return rng.NextDouble();
     }
 
-    public double GetMatchScore(int luck)
+    public double GetMatchScore(double luck)
     {
         return CalculateScoreWithLuck(luck);
     }
 
-    protected abstract double CalculateScoreWithLuck(int luck);
-    public abstract string ExplainScore(double score, int luck);
+    protected abstract double CalculateScoreWithLuck(double luck);
+    public abstract string ExplainScore(double score, double luck);
     public void SetName(string name) => Name = name;
     public void SetSurname(string surname) => Surname = surname;
     public void SetSkill(int skill) => Skill = skill;
     public string GetFullName() => $"{Name} {Surname}";
-    public void ForceSetId(Guid id)
-    {
-        typeof(Entity<Guid>)
-            .GetProperty(nameof(Id))!
-            .SetValue(this, id);
-    }
 }

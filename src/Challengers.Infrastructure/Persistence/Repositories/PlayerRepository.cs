@@ -22,7 +22,7 @@ public class PlayerRepository(ChallengersDbContext context)
         return await _context.Players.CountAsync(cancellationToken);
     }
 
-    public async Task<PagedResultDto<Player>> GetFilteredAsync(GetPlayersQueryDto dto, CancellationToken cancellationToken)
+    public async Task<List<Player>> GetFilteredAsync(GetPlayersQueryDto dto, CancellationToken cancellationToken)
     {
         var query = _context.Players.AsNoTracking().AsQueryable();
 
@@ -41,19 +41,9 @@ public class PlayerRepository(ChallengersDbContext context)
             query = query.Where(p => p.Surname.Contains(dto.Surname));
         }
 
-        var total = await query.CountAsync(cancellationToken);
-        var players = await query
-            .Skip(((dto.Page ?? 1) - 1) * (dto.PageSize ?? 20))
-            .Take(dto.PageSize ?? 20)
-            .ToListAsync(cancellationToken);
+        var players = await query.ToListAsync(cancellationToken);
 
-        return new PagedResultDto<Player>
-        {
-            Items = players,
-            TotalCount = total,
-            Page = dto.Page ?? 1,
-            PageSize = dto.PageSize ?? 20
-        };
+        return players;
     }
     public async Task ReplaceAsync(Player player, CancellationToken cancellationToken)
     {

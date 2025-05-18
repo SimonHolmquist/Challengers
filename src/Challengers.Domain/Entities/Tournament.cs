@@ -1,5 +1,6 @@
 ﻿using Challengers.Domain.Common;
 using Challengers.Domain.Enums;
+using Challengers.Domain.Services;
 using Challengers.Shared.Helpers;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -39,7 +40,7 @@ public class Tournament : Entity<Guid>
         Players.AddRange(players);
     }
 
-    public void Simulate(Random? rng = null)
+    public void Simulate(IRandomGenerator? rng = null)
     {
         if (_isCompleted)
             throw new InvalidOperationException(GetMessage(TournamentAlreadyCompleted));
@@ -47,14 +48,14 @@ public class Tournament : Entity<Guid>
         if (Players.Count < MinPlayers || !IsPowerOfTwo(Players.Count))
             throw new ArgumentException(GetMessage(TournamentInvalidPlayerCount));
 
-        rng ??= new Random();
+        rng ??= new DefaultRandomGenerator();
         var queue = new Queue<Player>(Players);
 
         while (queue.Count > 1)
         {
-            var match = new Match(queue.Dequeue(), queue.Dequeue());
+            var match = new Match(queue.Dequeue(), queue.Dequeue(), rng);
             match.SetTournament(this);
-            match.Simulate(rng);
+            match.Simulate();
             Matches.Add(match);
             queue.Enqueue(match.Winner!);
         }

@@ -172,7 +172,7 @@
     <value>Error de formato en mensaje: {0}</value>
   </data>
   <data name="TournamentNotFound" xml:space="preserve">
-    <value>Torneo no encontrado.</value>
+    <value>Torneo con ID {0} no encontrado.</value>
   </data>
   <data name="PlayerIdNotFound" xml:space="preserve">
     <value>Jugador con ID {0} no encontrado.</value>
@@ -244,6 +244,6 @@
     <value>Los siguientes jugadores no coinciden con el género del torneo '{0}': {1}.</value>
   </data>
   <data name="TournamentGenderRequired" xml:space="preserve">
-    <value />
+    <value>Se requiere el género del torneo.</value>
   </data>
 </root>

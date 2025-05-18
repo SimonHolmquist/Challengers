@@ -3,6 +3,7 @@ using Challengers.Domain.Entities;
 using Challengers.Domain.Enums;
 using Challengers.Shared.Helpers;
 using MediatR;
+using System;
 
 namespace Challengers.Application.Features.Players.Commands.UpdatePlayer;
 
@@ -26,7 +27,7 @@ public class UpdatePlayerHandler(IPlayerRepository repository) : IRequestHandler
                 _ => throw new ArgumentException(ErrorMessages.InvalidGender())
             };
 
-            replacement.ForceSetId(existing.Id);
+            typeof(Player).GetProperty(nameof(Player.Id))!.SetValue(replacement, existing.Id);
 
             await _repository.ReplaceAsync(replacement, cancellationToken);
         }

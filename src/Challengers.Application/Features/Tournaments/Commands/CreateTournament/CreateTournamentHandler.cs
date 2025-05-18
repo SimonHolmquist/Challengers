@@ -4,6 +4,7 @@ using Challengers.Domain.Entities;
 using Challengers.Domain.Enums;
 using Challengers.Shared.Helpers;
 using MediatR;
+using System.Collections.Generic;
 
 namespace Challengers.Application.Features.Tournaments.Commands.CreateTournament;
 

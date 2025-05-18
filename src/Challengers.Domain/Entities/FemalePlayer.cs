@@ -1,4 +1,5 @@
 ﻿using Challengers.Domain.Enums;
+using System.Globalization;
 
 namespace Challengers.Domain.Entities;
 
@@ -17,20 +18,20 @@ public class FemalePlayer : Player
         ReactionTime = reactionTime;
     }
 
-    protected override double CalculateScoreWithLuck(int luck)
+    protected override double CalculateScoreWithLuck(double luck)
     {
         return Skill * FemaleSkillWeight +
                ReactionTime * FemaleReactionTimeWeight +
                luck * LuckWeight;
     }
 
-    public override string ExplainScore(double score, int luck)
+    public override string ExplainScore(double score, double luck)
     {
         return FormatMessage(
             FemaleScoreExplanation,
             Skill, FemaleSkillWeight,
             ReactionTime, FemaleReactionTimeWeight,
-            luck, LuckWeight,
+            luck.ToString(CultureInfo.InvariantCulture), LuckWeight,
             score
         );
     }

@@ -1,4 +1,5 @@
 ﻿using Challengers.Application.Interfaces.Persistence;
+using Challengers.Infrastructure.Auth;
 using Challengers.Infrastructure.Persistence.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,6 +12,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IPlayerRepository, PlayerRepository>();
         services.AddScoped<ITournamentRepository, TournamentRepository>();
         services.AddScoped<IMatchRepository, MatchRepository>();
+        services.AddScoped<JwtTokenGenerator>();
 
         return services;
     }
