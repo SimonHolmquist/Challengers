@@ -3,7 +3,7 @@ using Challengers.Application.Features.Players.Queries.GetPlayers;
 using Challengers.Application.Interfaces.Persistence;
 using Challengers.Domain.Entities;
 using Challengers.Domain.Enums;
-using Challengers.UnitTests.TestHelpers;
+using Challengers.UnitTests.Helpers;
 using FluentAssertions;
 using Moq;
 

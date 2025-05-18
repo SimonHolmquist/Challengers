@@ -1,7 +1,7 @@
 ﻿using Challengers.Domain.Entities;
 using Challengers.Domain.Enums;
 using Challengers.Domain.Services;
-using Challengers.UnitTests.TestHelpers;
+using Challengers.UnitTests.Helpers;
 using FluentAssertions;
 using Moq;
 using Match = Challengers.Domain.Entities.Match;

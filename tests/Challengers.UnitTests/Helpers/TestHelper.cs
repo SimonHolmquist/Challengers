@@ -1,7 +1,7 @@
 ﻿using Challengers.Domain.Common;
 using Challengers.Domain.Entities;
 
-namespace Challengers.UnitTests.TestHelpers;
+namespace Challengers.UnitTests.Helpers;
 
 public static class TestHelper
 {

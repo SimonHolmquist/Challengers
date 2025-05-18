@@ -1,7 +1,7 @@
 ﻿using Challengers.Domain.Services;
 using Moq;
 
-namespace Challengers.UnitTests.TestHelpers;
+namespace Challengers.UnitTests.Helpers;
 
 public static class MoqExtensions
 {
