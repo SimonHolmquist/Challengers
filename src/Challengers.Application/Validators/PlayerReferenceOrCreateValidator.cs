@@ -7,12 +7,10 @@ public class PlayerReferenceOrCreateValidator : AbstractValidator<PlayerDto>
 {
     public PlayerReferenceOrCreateValidator()
     {
-        When(p => p.Id is not null, () =>
-        {
-            RuleFor(p => p.Id)
-                .NotEmpty()
-                .WithMessage(PlayerIdRequired);
-        });
+        RuleFor(p => p.Id)
+            .Must(id => id.HasValue && id.Value != Guid.Empty)
+            .When(p => p.Id is not null)
+            .WithMessage(PlayerIdRequired);
 
         var validator = new CreatePlayerRequestDtoValidator();
 
