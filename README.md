@@ -92,7 +92,7 @@ tests/
    docker-compose up --build
    ```
 3. Swagger available at:
-   [http://localhost/swagger](http://localhost/swagger)
+   [http://localhost:5000/swagger/index.html](http://localhost:5000/swagger/index.html)
 
 ---
 
