@@ -8,6 +8,6 @@ public interface IPlayerRepository : IRepository<Player>
 {
     Task<List<Player>> GetPagedAsync(int page, int pageSize, CancellationToken cancellationToken);
     Task<int> CountAsync(CancellationToken cancellationToken);
-    Task<PagedResultDto<Player>> GetFilteredAsync(GetPlayersQueryDto dto, CancellationToken cancellationToken);
+    Task<List<Player>> GetFilteredAsync(GetPlayersQueryDto dto, CancellationToken cancellationToken);
     Task ReplaceAsync(Player player, CancellationToken cancellationToken);
 }
