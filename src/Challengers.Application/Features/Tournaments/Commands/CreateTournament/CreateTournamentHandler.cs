@@ -78,7 +78,7 @@ public class CreateTournamentHandler(ITournamentRepository tournamentRepository,
         return new CreateTournamentResponseDto
         {
             TournamentId = tournament.Id,
-            Message = GetMessage(TournamentCreatedSuccessfully)
+            Message = FormatMessage(TournamentCreatedSuccessfully, tournament.Name)
         };
     }
 

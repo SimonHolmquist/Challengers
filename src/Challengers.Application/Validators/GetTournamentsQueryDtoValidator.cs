@@ -10,7 +10,7 @@ public class GetTournamentsQueryDtoValidator : PaginationQueryDtoValidator<GetTo
     {
         When(x => x.Gender.HasValue, () =>
         {
-            RuleFor(x => x.Gender).Must(gender => gender == Gender.Male || gender == Gender.Female).WithMessage(InvalidGender);
+            RuleFor(x => x.Gender).Must(gender => gender == Gender.Male || gender == Gender.Female).WithMessage(GetMessage(InvalidGender));
         });
 
         RuleFor(x => x.Name)

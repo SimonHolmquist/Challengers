@@ -9,11 +9,11 @@ public class CreateTournamentRequestDtoValidator : AbstractValidator<CreateTourn
     public CreateTournamentRequestDtoValidator()
     {
         RuleFor(x => x.Name)
-            .NotEmpty().WithMessage(TournamentNameRequired)
+            .NotEmpty().WithMessage(GetMessage(TournamentNameRequired))
             .MaximumLength(TournamentNameMaxLength).WithMessage(FormatMessage(TournamentNameTooLong, TournamentNameMaxLength));
 
         RuleFor(x => x.Gender)
-            .NotEmpty().WithMessage(TournamentGenderRequired)
+            .NotEmpty().WithMessage(GetMessage(TournamentGenderRequired))
             .Must(gender => gender == Gender.Male || gender == Gender.Female).WithMessage(InvalidGender);
 
         RuleFor(x => x.Players)
@@ -23,7 +23,7 @@ public class CreateTournamentRequestDtoValidator : AbstractValidator<CreateTourn
         RuleFor(x => x.Players)
             .NotEmpty().WithMessage(TournamentPlayersEmpty)
             .Must(p => p.Count > 1 && (p.Count & (p.Count - 1)) == 0)
-            .WithMessage(TournamentInvalidPlayerCount);
+            .WithMessage(GetMessage(TournamentInvalidPlayerCount));
 
         RuleForEach(x => x.Players).SetValidator(new PlayerReferenceOrCreateValidator());
     }

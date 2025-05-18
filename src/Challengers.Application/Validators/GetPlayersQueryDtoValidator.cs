@@ -8,13 +8,13 @@ public class GetPlayersQueryDtoValidator : PaginationQueryDtoValidator<GetPlayer
 {
     public GetPlayersQueryDtoValidator()
     {
-        RuleFor(x => x.Name).MaximumLength(MaxNameLength).WithMessage(NameTooLong);
+        RuleFor(x => x.Name).MaximumLength(MaxNameLength).WithMessage(GetMessage(NameTooLong));
 
-        RuleFor(x => x.Surname).MaximumLength(MaxSurnameLength).WithMessage(SurnameTooLong);
+        RuleFor(x => x.Surname).MaximumLength(MaxSurnameLength).WithMessage(GetMessage(SurnameTooLong));
 
         When(x => x.Gender.HasValue, () =>
         {
-            RuleFor(x => x.Gender).Must(gender => gender == Gender.Male || gender == Gender.Female).WithMessage(InvalidGender);
+            RuleFor(x => x.Gender).Must(gender => gender == Gender.Male || gender == Gender.Female).WithMessage(GetMessage(InvalidGender));
         });
     }
 }

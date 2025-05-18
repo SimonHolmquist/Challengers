@@ -9,45 +9,45 @@ public class CreatePlayerRequestDtoValidator : AbstractValidator<CreatePlayerReq
     public CreatePlayerRequestDtoValidator()
     {
         RuleFor(x => x.Name)
-            .NotEmpty().WithMessage(NameRequired)
-            .MaximumLength(MaxNameLength).WithMessage(NameTooLong);
+            .NotEmpty().WithMessage(GetMessage(NameRequired))
+            .MaximumLength(MaxNameLength).WithMessage(GetMessage(NameTooLong));
 
         RuleFor(x => x.Surname)
-            .NotEmpty().WithMessage(SurnameRequired)
-            .MaximumLength(MaxSurnameLength).WithMessage(SurnameTooLong);
+            .NotEmpty().WithMessage(GetMessage(SurnameRequired))
+            .MaximumLength(MaxSurnameLength).WithMessage(GetMessage(SurnameTooLong));
 
         RuleFor(x => x.Skill)
             .InclusiveBetween(MinStat, MaxStat)
-            .WithMessage(SkillOutOfRange);
+            .WithMessage(GetMessage(SkillOutOfRange));
 
         When(x => x.Gender == Gender.Female, () =>
         {
             RuleFor(x => x.ReactionTime)
-                .NotNull().WithMessage(ReactionTimeRequired)
+                .NotNull().WithMessage(GetMessage(ReactionTimeRequired))
                 .InclusiveBetween(MinStat, MaxStat)
-                .WithMessage(ReactionOutOfRange);
+                .WithMessage(GetMessage(ReactionOutOfRange));
 
             RuleFor(x => x.Strength)
-                .Null().WithMessage(StrengthNotAllowedForFemale);
+                .Null().WithMessage(GetMessage(StrengthNotAllowedForFemale));
 
             RuleFor(x => x.Speed)
-                .Null().WithMessage(SpeedNotAllowedForFemale);
+                .Null().WithMessage(GetMessage(SpeedNotAllowedForFemale));
         });
 
         When(x => x.Gender == Gender.Male, () =>
         {
             RuleFor(x => x.Strength)
-                .NotNull().WithMessage(StrengthRequiredForMale)
+                .NotNull().WithMessage(GetMessage(StrengthRequiredForMale))
                 .InclusiveBetween(MinStat, MaxStat)
-                .WithMessage(StrengthOutOfRange);
+                .WithMessage(GetMessage(StrengthOutOfRange));
 
             RuleFor(x => x.Speed)
-                .NotNull().WithMessage(SpeedRequiredForMale)
+                .NotNull().WithMessage(GetMessage(SpeedRequiredForMale))
                 .InclusiveBetween(MinStat, MaxStat)
-                .WithMessage(SpeedOutOfRange);
+                .WithMessage(GetMessage(SpeedOutOfRange));
 
             RuleFor(x => x.ReactionTime)
-                .Null().WithMessage(ReactionTimeNotAllowedForMale);
+                .Null().WithMessage(GetMessage(ReactionTimeNotAllowedForMale));
         });
     }
 }

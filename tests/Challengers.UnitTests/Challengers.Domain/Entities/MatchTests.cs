@@ -91,7 +91,7 @@ public class MatchTests
 
         // Assert
         act.Should().Throw<InvalidOperationException>()
-           .WithMessage("*already*");
+           .WithMessage(GetMessage(MatchAlreadySimulated));
     }
 
     [Fact]
@@ -105,7 +105,7 @@ public class MatchTests
 
         // Assert
         act.Should().Throw<ArgumentException>()
-           .WithMessage("*players*");
+           .WithMessage(GetMessage(MatchPlayersRequired));
     }
 
     [Fact]
@@ -119,7 +119,7 @@ public class MatchTests
 
         // Assert
         act.Should().Throw<ArgumentException>()
-           .WithMessage("*players*");
+           .WithMessage(GetMessage(MatchPlayersRequired));
     }
 
     [Fact]
@@ -133,7 +133,7 @@ public class MatchTests
 
         // Assert
         act.Should().Throw<ArgumentException>()
-           .WithMessage("*themselves*");
+           .WithMessage(GetMessage(MatchSamePlayer));
     }
 
     [Fact]

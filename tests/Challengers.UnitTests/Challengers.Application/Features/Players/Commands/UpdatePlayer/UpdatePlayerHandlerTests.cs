@@ -78,12 +78,16 @@ namespace Challengers.UnitTests.Challengers.Application.Features.Players.Command
             await handler.Handle(command, CancellationToken.None);
 
             // Assert
-            repositoryMock.Verify(r => r.ReplaceAsync(It.Is<FemalePlayer>(
-                p => p.Name == "Ana" && p.Surname == "Lopez" && p.Skill == 85 && p.ReactionTime == 90
-                     && p.Id == id
+            repositoryMock.Verify(r => r.Delete(It.Is<Player>(p => p == existing)), Times.Once);
+            repositoryMock.Verify(r => r.AddAsync(It.Is<FemalePlayer>(p =>
+                p.Name == "Ana" &&
+                p.Surname == "Lopez" &&
+                p.Skill == 85 &&
+                p.ReactionTime == 90 &&
+                p.Id == id
             ), It.IsAny<CancellationToken>()), Times.Once);
 
-            repositoryMock.Verify(r => r.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
+            repositoryMock.Verify(r => r.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Exactly(2));
         }
 
         [Fact]

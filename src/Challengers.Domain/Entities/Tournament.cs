@@ -27,13 +27,13 @@ public class Tournament : Entity<Guid>
     public Tournament(string name, Gender gender, IList<Player> players)
     {
         if (string.IsNullOrWhiteSpace(name))
-            throw new ArgumentException(GetMessage(TournamentNameRequired), nameof(name));
+            throw new ArgumentException(GetMessage(TournamentNameRequired));
 
         if (gender != Gender.Male && gender != Gender.Female)
             throw new ArgumentException(ErrorMessages.InvalidGender());
 
         if (players is null || players.Count < MinPlayers || !IsPowerOfTwo(players.Count))
-            throw new ArgumentException(GetMessage(TournamentInvalidPlayerCount), nameof(players));
+            throw new ArgumentException(GetMessage(TournamentInvalidPlayerCount));
 
         Name = name;
         Gender = gender;

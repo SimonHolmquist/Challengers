@@ -1,6 +1,7 @@
 ﻿using Challengers.Domain.Entities;
 using Challengers.Domain.Enums;
 using Challengers.Domain.Services;
+using Challengers.Shared.Helpers;
 using Challengers.UnitTests.Helpers;
 using FluentAssertions;
 using Moq;
@@ -88,7 +89,7 @@ public class TournamentTests
 
         // Assert
         act.Should().Throw<InvalidOperationException>()
-            .WithMessage("*already*");
+            .WithMessage(GetMessage(TournamentAlreadyCompleted));
     }
 
     [Fact]
@@ -193,7 +194,7 @@ public class TournamentTests
 
         // Assert
         act.Should().Throw<ArgumentException>()
-           .WithMessage("*name*");
+           .WithMessage(GetMessage(TournamentNameRequired));
     }
     [Fact]
     public void Constructor_ShouldThrow_WhenGenderIsInvalid()
@@ -210,7 +211,7 @@ public class TournamentTests
 
         // Assert
         act.Should().Throw<ArgumentException>()
-           .WithMessage("*gender*");
+           .WithMessage(ErrorMessages.InvalidGender());
     }
     [Theory]
     [InlineData(0)]
@@ -229,7 +230,7 @@ public class TournamentTests
 
         // Assert
         act.Should().Throw<ArgumentException>()
-           .WithMessage("*power of two*");
+           .WithMessage(GetMessage(TournamentInvalidPlayerCount));
     }
     [Fact]
     public void Simulate_ShouldThrow_WhenTournamentAlreadySimulated()
@@ -248,7 +249,7 @@ public class TournamentTests
 
         // Assert
         act.Should().Throw<InvalidOperationException>()
-           .WithMessage("*already*");
+           .WithMessage(GetMessage(TournamentAlreadyCompleted));
     }
 
     [Theory]

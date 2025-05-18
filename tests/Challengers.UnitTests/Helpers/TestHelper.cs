@@ -2,11 +2,18 @@
 using Challengers.Domain.Common;
 using Challengers.Domain.Entities;
 using Challengers.Domain.Enums;
+using System.Net.Http.Json;
+using System.Text.Json;
 
 namespace Challengers.UnitTests.Helpers;
 
 public static class TestHelper
 {
+    private static readonly JsonSerializerOptions _jsonSerializerOptions = new()
+    {
+        PropertyNameCaseInsensitive = true
+    };
+
     public static T WithId<T>(this T entity, Guid id) where T : Entity<Guid>
     {
         typeof(T).GetProperty(nameof(Entity<Guid>.Id))!
@@ -66,4 +73,23 @@ public static class TestHelper
             Strength = null,
             Speed = null
         };
+
+    public static async Task<Guid?> CreateAndGetPlayerIdAsync(CreatePlayerRequestDto dto, HttpClient client)
+    {
+        var _client = client;
+        await _client.PostAsJsonAsync("/api/players", dto);
+        var response = await _client.GetAsync($"/api/players?name={dto.Name}");
+        var raw = await response.Content.ReadAsStringAsync();
+        var paged = JsonSerializer.Deserialize<PagedResultDto<PlayerDto>>(raw, _jsonSerializerOptions);
+        return paged!.Items[0].Id;
+    }
+
+    public static async Task<PlayerDto> GetPlayer(Guid id, HttpClient client)
+    {
+        var _client = client;
+        var response = await _client.GetAsync($"/api/players/{id}");
+        var raw = await response.Content.ReadAsStringAsync();
+        return JsonSerializer.Deserialize<PlayerDto>(raw, _jsonSerializerOptions)!;
+    }
+
 }
