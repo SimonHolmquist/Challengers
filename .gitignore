@@ -15,7 +15,6 @@ obj/
 Thumbs.db
 
 # Docker
-**/Dockerfile
 **/docker-compose.override.yml
 docker/sql_data/
 
