@@ -16,7 +16,7 @@ public class TournamentsController(IMediator mediator) : ControllerBase
     private readonly IMediator _mediator = mediator;
 
     [HttpPost]
-    public async Task<ActionResult<CreateTournamentResponseDto>> Create([FromBody] CreateTournamentRequestDto dto, CancellationToken cancellationToken)
+    public async Task<ActionResult<CreateTournamentResponseDto>> CreateTournament(CreateTournamentRequestDto dto, CancellationToken cancellationToken)
     {
         var result = await _mediator.Send(new CreateTournamentCommand(dto), cancellationToken);
         return CreatedAtAction(nameof(GetById), new { id = result.TournamentId }, result);

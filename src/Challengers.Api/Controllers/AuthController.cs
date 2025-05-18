@@ -19,9 +19,6 @@ public class AuthController(JwtTokenGenerator tokenGenerator, IConfiguration con
         var adminUsername = _configuration["AdminCredentials:Username"];
         var adminPassword = _configuration["AdminCredentials:Password"];
 
-        Console.WriteLine($"Expected: {adminUsername} / {adminPassword}");
-        Console.WriteLine($"Received: {request.Username} / {request.Password}");
-
         if (request.Username != adminUsername || request.Password != adminPassword)
             return Unauthorized("Invalid credentials");
 

@@ -45,13 +45,4 @@ public class PlayerRepository(ChallengersDbContext context)
 
         return players;
     }
-    public async Task ReplaceAsync(Player player, CancellationToken cancellationToken)
-    {
-        var existingPlayer = await GetByIdAsync(player.Id, cancellationToken);
-        if (existingPlayer != null)
-        {
-            _context.Players.Remove(existingPlayer);
-        }
-        _context.Players.Add(player);
-    }
 }

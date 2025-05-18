@@ -10,10 +10,12 @@ using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Globalization;
 using System.Text;
 
 namespace Challengers.Api;
@@ -37,26 +39,21 @@ public class Program
             .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
             .AddEnvironmentVariables();
 
-        var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
         builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
-        builder.Services.AddDbContext<ChallengersDbContext>(options =>
-        {
-            options.UseSqlServer(connectionString, sql =>
-            {
-                sql.EnableRetryOnFailure();
-            });
-        });
+        builder.Services.AddChallengersDbContext(builder.Configuration, builder.Environment);
 
         builder.Services.AddMediatR(cfg =>
             cfg.RegisterServicesFromAssemblyContaining<CreateTournamentCommand>());
 
         builder.Services.AddControllers(options =>
         {
-            options.Filters.Add(new AuthorizeFilter(new AuthorizationPolicyBuilder()
-                .RequireAuthenticatedUser()
-                .Build()));
+            if (!builder.Environment.IsEnvironment("Testing") || Environment.GetEnvironmentVariable("ENABLE_AUTH") == "true")
+            {
+                options.Filters.Add(new AuthorizeFilter(new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build()));
+            }
         });
 
         builder.Services.AddInfrastructureServices();
@@ -114,6 +111,17 @@ public class Program
         });
 
         builder.Services.AddAuthorization();
+        builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+        builder.Services.Configure<RequestLocalizationOptions>(options =>
+        {
+            var supportedCultures = new[] { new CultureInfo("en"), new CultureInfo("es") };
+
+            options.DefaultRequestCulture = new RequestCulture("en");
+            options.SupportedCultures = supportedCultures;
+            options.SupportedUICultures = supportedCultures;
+            options.RequestCultureProviders = [new AcceptLanguageHeaderRequestCultureProvider()];
+        });
 
         var app = builder.Build();
 
@@ -125,26 +133,28 @@ public class Program
 
         app.UseHttpsRedirection();
         app.UseMiddleware<ExceptionHandlingMiddleware>();
+        app.UseRouting();
+        app.UseRequestLocalization();
         app.UseAuthentication();
         app.UseAuthorization();
         app.MapControllers();
-        app.MapGet("/ping", () => Results.Ok("pong"));
 
-        if (app.Environment.IsDevelopment() || app.Environment.IsStaging())
+        if (!app.Environment.IsProduction())
         {
             using var scope = app.Services.CreateScope();
             var db = scope.ServiceProvider.GetRequiredService<ChallengersDbContext>();
-            db.Database.Migrate();
+
+            if (db.Database.ProviderName != "Microsoft.EntityFrameworkCore.InMemory")
+            {
+                db.Database.Migrate();
+            }
         }
 
         app.Run();
     }
     private static JwtSettings ValidateJwtSettings(WebApplicationBuilder builder)
     {
-        var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>();
-
-        if (jwtSettings == null)
-            throw new InvalidOperationException("JwtSettings section is missing.");
+        var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>() ?? throw new InvalidOperationException("JwtSettings section is missing.");
 
         if (string.IsNullOrWhiteSpace(jwtSettings.Key))
             throw new InvalidOperationException("JwtSettings:Key is missing.");

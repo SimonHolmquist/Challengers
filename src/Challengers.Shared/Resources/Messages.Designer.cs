@@ -367,7 +367,7 @@ namespace Challengers.Shared.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tournament created successfully..
+        ///   Looks up a localized string similar to Tournament &apos;{0}&apos; created successfully..
         /// </summary>
         internal static string TournamentCreatedSuccessfully {
             get {

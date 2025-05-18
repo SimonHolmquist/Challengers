@@ -166,7 +166,7 @@
     <value>The number of players must be a power of two and non-zero.</value>
   </data>
   <data name="TournamentCreatedSuccessfully" xml:space="preserve">
-    <value>Tournament created successfully.</value>
+    <value>Tournament '{0}' created successfully.</value>
   </data>
   <data name="FormatError" xml:space="preserve">
     <value> Format error in message: {0}</value>

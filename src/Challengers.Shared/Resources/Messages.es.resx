@@ -166,7 +166,7 @@
     <value>La cantidad de jugadores debe ser potencia de dos y mayor que cero.</value>
   </data>
   <data name="TournamentCreatedSuccessfully" xml:space="preserve">
-    <value>Torneo creado exitosamente.</value>
+    <value>Torneo '{0}' creado exitosamente.</value>
   </data>
   <data name="FormatError" xml:space="preserve">
     <value>Error de formato en mensaje: {0}</value>

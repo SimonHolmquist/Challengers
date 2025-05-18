@@ -1,7 +1,7 @@
 ﻿using Challengers.Domain.Entities;
 using Challengers.Domain.Enums;
 using Challengers.Domain.Services;
-using Challengers.UnitTests.TestHelpers;
+using Challengers.UnitTests.Helpers;
 using FluentAssertions;
 using Moq;
 using Match = Challengers.Domain.Entities.Match;
@@ -17,7 +17,7 @@ public class MatchTests
     }
 
     [Fact]
-    public void Play_ShouldReturnPlayerWithHigherSkill_WhenLuckIsEqual()
+    public void Simulate_ShouldReturnPlayerWithHigherSkill_WhenLuckIsEqual()
     {
         // Arrange
         var player1 = new MalePlayer("Player", "One", 90, 70, 70);
@@ -35,7 +35,7 @@ public class MatchTests
     }
 
     [Fact]
-    public void Play_ShouldReturnUnderdog_WhenLuckIsHighForHim()
+    public void Simulate_ShouldReturnUnderdog_WhenLuckIsHighForHim()
     {
         // Arrange
         var player1 = new FemalePlayer("Top", "Player", 90, 90);
@@ -55,7 +55,7 @@ public class MatchTests
     }
 
     [Fact]
-    public void Play_ShouldSelectWinnerById_WhenScoresAreExactlyEqual()
+    public void Simulate_ShouldSelectWinnerById_WhenScoresAreExactlyEqual()
     {
         // Arrange
         var guid1 = Guid.Parse("00000000-0000-0000-0000-000000000001");
@@ -91,7 +91,7 @@ public class MatchTests
 
         // Assert
         act.Should().Throw<InvalidOperationException>()
-           .WithMessage("*already*");
+           .WithMessage(GetMessage(MatchAlreadySimulated));
     }
 
     [Fact]
@@ -105,7 +105,7 @@ public class MatchTests
 
         // Assert
         act.Should().Throw<ArgumentException>()
-           .WithMessage("*players*");
+           .WithMessage(GetMessage(MatchPlayersRequired));
     }
 
     [Fact]
@@ -119,7 +119,7 @@ public class MatchTests
 
         // Assert
         act.Should().Throw<ArgumentException>()
-           .WithMessage("*players*");
+           .WithMessage(GetMessage(MatchPlayersRequired));
     }
 
     [Fact]
@@ -133,7 +133,7 @@ public class MatchTests
 
         // Assert
         act.Should().Throw<ArgumentException>()
-           .WithMessage("*themselves*");
+           .WithMessage(GetMessage(MatchSamePlayer));
     }
 
     [Fact]
