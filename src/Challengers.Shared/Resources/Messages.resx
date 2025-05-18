@@ -172,7 +172,7 @@
     <value> Format error in message: {0}</value>
   </data>
   <data name="TournamentNotFound" xml:space="preserve">
-    <value>Tournament not found.</value>
+    <value>Tournament with ID {0} not found.</value>
   </data>
   <data name="PlayerIdNotFound" xml:space="preserve">
     <value>Player with ID {0} not found.</value>
