@@ -125,7 +125,7 @@ public class Program
 
         var app = builder.Build();
 
-        if (app.Environment.IsDevelopment())
+        if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
         {
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Challengers API v1"));
@@ -139,9 +139,8 @@ public class Program
         app.UseAuthorization();
         app.MapControllers();
 
-        if (!app.Environment.IsProduction())
+        using (var scope = app.Services.CreateScope())
         {
-            using var scope = app.Services.CreateScope();
             var db = scope.ServiceProvider.GetRequiredService<ChallengersDbContext>();
 
             if (db.Database.ProviderName != "Microsoft.EntityFrameworkCore.InMemory")
