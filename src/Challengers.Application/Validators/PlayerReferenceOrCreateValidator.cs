@@ -21,8 +21,8 @@ public class PlayerReferenceOrCreateValidator : AbstractValidator<PlayerDto>
         {
             var tempDto = new CreatePlayerRequestDto
             {
-                Name = dto.Name ?? string.Empty,
-                Surname = dto.Surname ?? string.Empty,
+                FirstName = dto.FirstName ?? string.Empty,
+                LastName = dto.LastName ?? string.Empty,
                 Skill = dto.Skill ?? MinStat,
                 Strength = dto.Strength,
                 Speed = dto.Speed,

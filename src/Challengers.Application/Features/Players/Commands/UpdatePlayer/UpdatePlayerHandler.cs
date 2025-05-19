@@ -22,8 +22,8 @@ public class UpdatePlayerHandler(IPlayerRepository repository) : IRequestHandler
         {
             Player replacement = dto.Gender.Value switch
             {
-                Gender.Male => new MalePlayer(dto.Name ?? existing.Name, dto.Surname ?? existing.Surname, dto.Skill ?? existing.Skill, dto.Strength!.Value, dto.Speed!.Value),
-                Gender.Female => new FemalePlayer(dto.Name ?? existing.Name, dto.Surname ?? existing.Surname, dto.Skill ?? existing.Skill, dto.ReactionTime!.Value),
+                Gender.Male => new MalePlayer(dto.FirstName ?? existing.FirstName, dto.LastName ?? existing.LastName, dto.Skill ?? existing.Skill, dto.Strength!.Value, dto.Speed!.Value),
+                Gender.Female => new FemalePlayer(dto.FirstName ?? existing.FirstName, dto.LastName ?? existing.LastName, dto.Skill ?? existing.Skill, dto.ReactionTime!.Value),
                 _ => throw new ArgumentException(ErrorMessages.InvalidGender())
             };
 
@@ -40,8 +40,8 @@ public class UpdatePlayerHandler(IPlayerRepository repository) : IRequestHandler
             return Unit.Value;
         }
 
-        if (!string.IsNullOrEmpty(dto.Name)) existing.SetName(dto.Name);
-        if (!string.IsNullOrEmpty(dto.Surname)) existing.SetSurname(dto.Surname);
+        if (!string.IsNullOrEmpty(dto.FirstName)) existing.SetName(dto.FirstName);
+        if (!string.IsNullOrEmpty(dto.LastName)) existing.SetLastName(dto.LastName);
         if (dto.Skill.HasValue) existing.SetSkill(dto.Skill.Value);
 
         if (existing is MalePlayer m && dto.Strength is not null && dto.Speed is not null)

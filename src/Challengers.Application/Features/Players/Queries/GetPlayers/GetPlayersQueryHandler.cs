@@ -24,8 +24,8 @@ public class GetPlayersQueryHandler(IPlayerRepository repository) : IRequestHand
             .Select(p => new PlayerDto
             {
                 Id = p.Id,
-                Name = p.Name,
-                Surname = p.Surname,
+                FirstName = p.FirstName,
+                LastName = p.LastName,
                 Skill = p.Skill,
                 Strength = p is MalePlayer m ? m.Strength : null,
                 Speed = p is MalePlayer m2 ? m2.Speed : null,

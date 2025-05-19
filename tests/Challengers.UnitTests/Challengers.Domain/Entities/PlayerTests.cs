@@ -44,14 +44,14 @@ public class PlayerTests
     }
 
     [Theory]
-    [InlineData(null, "Surname")]
+    [InlineData(null, "LastName")]
     [InlineData("Name", null)]
-    [InlineData("", "Surname")]
+    [InlineData("", "LastName")]
     [InlineData("Name", "")]
-    public void FemalePlayer_ShouldThrow_WhenNameOrSurnameInvalid(string? name, string? surname)
+    public void FemalePlayer_ShouldThrow_WhenNameOrLastNameInvalid(string? name, string? lastname)
     {
         // Arrange & Act
-        Action act = () => new FemalePlayer(name!, surname!, 80, 80);
+        Action act = () => new FemalePlayer(name!, lastname!, 80, 80);
         // Assert
         act.Should().Throw<ArgumentException>();
     }
@@ -100,18 +100,18 @@ public class PlayerTests
         // Act
         player.SetName("Laura");
         // Assert   
-        player.Name.Should().Be("Laura");
+        player.FirstName.Should().Be("Laura");
     }
 
     [Fact]
-    public void SetSurname_ShouldUpdatePlayerSurname()
+    public void SetLastName_ShouldUpdatePlayerLastName()
     {
         // Arrange
         var player = new FemalePlayer("Ana", "Perez", 80, 80);
         // Act
-        player.SetSurname("Gomez");
+        player.SetLastName("Gomez");
         // Assert
-        player.Surname.Should().Be("Gomez");
+        player.LastName.Should().Be("Gomez");
     }
 
     [Fact]
@@ -131,7 +131,7 @@ public class PlayerTests
         // Arrange
         var player = new FemalePlayer("Ana", "Perez", 80, 80);
         // Act
-        var fullName = player.GetFullName();
+        var fullName = player.FullName;
         // Assert
         fullName.Should().Be("Ana Perez");
     }

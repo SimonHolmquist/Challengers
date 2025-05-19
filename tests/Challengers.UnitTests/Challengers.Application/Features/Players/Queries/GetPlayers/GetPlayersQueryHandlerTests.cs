@@ -56,7 +56,7 @@ public class GetPlayersQueryHandlerTests
                       .ReturnsAsync([]);
 
         var handler = new GetPlayersQueryHandler(repositoryMock.Object);
-        var query = new GetPlayersQuery(new GetPlayersQueryDto { Name = "NoExiste" });
+        var query = new GetPlayersQuery(new GetPlayersQueryDto { FirstName = "NoExiste" });
 
         var result = await handler.Handle(query, CancellationToken.None);
 
@@ -86,8 +86,8 @@ public class GetPlayersQueryHandlerTests
         var result = await handler.Handle(query, CancellationToken.None);
 
         result.Items.Should().ContainSingle(p =>
-            p.Name == "Carlos" &&
-            p.Surname == "Diaz" &&
+            p.FirstName == "Carlos" &&
+            p.LastName == "Diaz" &&
             p.Skill == 75 &&
             p.Strength == 70 &&
             p.Speed == 65

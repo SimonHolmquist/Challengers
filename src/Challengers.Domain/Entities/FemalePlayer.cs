@@ -7,8 +7,8 @@ public class FemalePlayer : Player
 {
     public int ReactionTime { get; private set; }
 
-    public FemalePlayer(string name, string surname, int skill, int reactionTime)
-        : base(name, surname, skill, Gender.Female)
+    public FemalePlayer(string firstName, string lastName, int skill, int reactionTime)
+        : base(firstName, lastName, skill, Gender.Female)
     {
         if (reactionTime is < MinStat or > MaxStat)
             throw new ArgumentOutOfRangeException(

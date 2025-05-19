@@ -117,8 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="NameRequired" xml:space="preserve">
-    <value>Name cannot be empty.</value>
+  <data name="FirstNameRequired" xml:space="preserve">
+    <value>First name cannot be empty.</value>
   </data>
   <data name="ReactionOutOfRange" xml:space="preserve">
     <value>Reaction time must be between {0} and {1}.</value>
@@ -169,7 +169,7 @@
     <value>Tournament '{0}' created successfully.</value>
   </data>
   <data name="FormatError" xml:space="preserve">
-    <value> Format error in message: {0}</value>
+    <value>Format error in message: {0}</value>
   </data>
   <data name="TournamentNotFound" xml:space="preserve">
     <value>Tournament with ID {0} not found.</value>
@@ -204,14 +204,14 @@
   <data name="MixedGenderAttributes" xml:space="preserve">
     <value>A player cannot have both reaction time and strength/speed.</value>
   </data>
-  <data name="SurnameRequired" xml:space="preserve">
-    <value>Player surname is required.</value>
+  <data name="LastNameRequired" xml:space="preserve">
+    <value>Player last name is required.</value>
   </data>
-  <data name="SurnameTooLong" xml:space="preserve">
-    <value>Player surname must be at most {0} characters.</value>
+  <data name="LastNameTooLong" xml:space="preserve">
+    <value>Player last name must be at most {0} characters.</value>
   </data>
-  <data name="NameTooLong" xml:space="preserve">
-    <value>Player name must be at most {0} characters.</value>
+  <data name="FirstNameTooLong" xml:space="preserve">
+    <value>Player first name must be at most {0} characters.</value>
   </data>
   <data name="PlayerIdRequired" xml:space="preserve">
     <value>Player ID is required when referencing an existing player.</value>

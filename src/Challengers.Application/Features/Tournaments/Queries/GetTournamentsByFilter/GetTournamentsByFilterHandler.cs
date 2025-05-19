@@ -29,7 +29,7 @@ public class GetTournamentsByFilterHandler(ITournamentRepository repository) : I
                 Name = t.Name,
                 Gender = t.Gender,
                 CreatedAt = t.CreatedAt,
-                Winner = t.Winner?.GetFullName() ?? string.Empty
+                Winner = t.Winner?.FullName ?? string.Empty
             })
             .ToList();
 

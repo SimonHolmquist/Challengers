@@ -22,8 +22,8 @@ public class CreateTournamentHandlerTests
             SavePlayers = true,
             Players =
             [
-                new() { Name = "Ana", Surname = "López", Skill = 85, ReactionTime = 80, Gender = Gender.Female },
-                new() { Name = "Laura", Surname = "Pérez", Skill = 88, ReactionTime = 82, Gender = Gender.Female }
+                new() { FirstName = "Ana", LastName = "López", Skill = 85, ReactionTime = 80, Gender = Gender.Female },
+                new() { FirstName = "Laura", LastName = "Pérez", Skill = 88, ReactionTime = 82, Gender = Gender.Female }
             ]
         };
 
@@ -116,7 +116,7 @@ public class CreateTournamentHandlerTests
             Players =
         [
             new() { Id = existingId },
-            new() { Name = "Caro", Surname = "Y", Skill = 85, ReactionTime = 75, Gender = Gender.Female }
+            new() { FirstName = "Caro", LastName = "Y", Skill = 85, ReactionTime = 75, Gender = Gender.Female }
         ]
         };
 

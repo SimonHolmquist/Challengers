@@ -8,10 +8,10 @@ public static class MessageKeys
     public const string Gender_Male = nameof(Gender_Male);
     public const string Gender_Female = nameof(Gender_Female);
 
-    public const string NameRequired = nameof(NameRequired);
-    public const string SurnameRequired = nameof(SurnameRequired);
-    public const string NameTooLong = nameof(NameTooLong);
-    public const string SurnameTooLong = nameof(SurnameTooLong);
+    public const string FirstNameRequired = nameof(FirstNameRequired);
+    public const string LastNameRequired = nameof(LastNameRequired);
+    public const string FirstNameTooLong = nameof(FirstNameTooLong);
+    public const string LastNameTooLong = nameof(LastNameTooLong);
     public const string PlayerIdRequired = nameof(PlayerIdRequired);
     public const string SkillOutOfRange = nameof(SkillOutOfRange);
     public const string StrengthOutOfRange = nameof(StrengthOutOfRange);

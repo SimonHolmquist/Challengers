@@ -8,9 +8,9 @@ public class GetPlayersQueryDtoValidator : PaginationQueryDtoValidator<GetPlayer
 {
     public GetPlayersQueryDtoValidator()
     {
-        RuleFor(x => x.Name).MaximumLength(MaxNameLength).WithMessage(GetMessage(NameTooLong));
+        RuleFor(x => x.FirstName).MaximumLength(MaxNameLength).WithMessage(GetMessage(FirstNameTooLong));
 
-        RuleFor(x => x.Surname).MaximumLength(MaxSurnameLength).WithMessage(GetMessage(SurnameTooLong));
+        RuleFor(x => x.LastName).MaximumLength(MaxLastNameLength).WithMessage(GetMessage(LastNameTooLong));
 
         When(x => x.Gender.HasValue, () =>
         {

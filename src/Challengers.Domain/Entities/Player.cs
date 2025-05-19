@@ -6,25 +6,26 @@ namespace Challengers.Domain.Entities;
 
 public abstract class Player : Entity<Guid>
 {
-    public string Name { get; private set; } = default!;
-    public string Surname { get; private set; } = default!;
+    public string FirstName { get; private set; } = default!;
+    public string LastName { get; private set; } = default!;
+    public string FullName { get => $"{FirstName} {LastName}"; }
     public int Skill { get; private set; }
     public Gender Gender { get; private set; }
     public List<Tournament> Tournaments { get; private set; } = [];
-    protected Player(string name, string surname, int skill, Gender gender)
+    protected Player(string firstName, string lastName, int skill, Gender gender)
     {
-        if (string.IsNullOrWhiteSpace(name))
-            throw new ArgumentException(NameRequired, nameof(name));
+        if (string.IsNullOrWhiteSpace(firstName))
+            throw new ArgumentException(GetMessage(FirstNameRequired));
 
-        if (string.IsNullOrWhiteSpace(surname))
-            throw new ArgumentException(SurnameRequired, nameof(surname));
+        if (string.IsNullOrWhiteSpace(lastName))
+            throw new ArgumentException(GetMessage(LastNameRequired));
 
         if (skill is < MinStat or > MaxStat)
             throw new ArgumentOutOfRangeException(nameof(skill),
                 FormatMessage(SkillOutOfRange, MinStat, MaxStat));
 
-        Name = name;
-        Surname = surname;
+        FirstName = firstName;
+        LastName = lastName;
         Skill = skill;
         Gender = gender;
     }
@@ -41,8 +42,7 @@ public abstract class Player : Entity<Guid>
 
     protected abstract double CalculateScoreWithLuck(double luck);
     public abstract string ExplainScore(double score, double luck);
-    public void SetName(string name) => Name = name;
-    public void SetSurname(string surname) => Surname = surname;
+    public void SetName(string name) => FirstName = name;
+    public void SetLastName(string lastname) => LastName = lastname;
     public void SetSkill(int skill) => Skill = skill;
-    public string GetFullName() => $"{Name} {Surname}";
 }

@@ -17,8 +17,8 @@ public class CreatePlayerHandler(IPlayerRepository repository)
 
         Player player = dto.Gender switch
         {
-            Gender.Male => new MalePlayer(dto.Name, dto.Surname, dto.Skill, dto.Strength!.Value, dto.Speed!.Value),
-            Gender.Female => new FemalePlayer(dto.Name, dto.Surname, dto.Skill, dto.ReactionTime!.Value),
+            Gender.Male => new MalePlayer(dto.FirstName, dto.LastName, dto.Skill, dto.Strength!.Value, dto.Speed!.Value),
+            Gender.Female => new FemalePlayer(dto.FirstName, dto.LastName, dto.Skill, dto.ReactionTime!.Value),
             _ => throw new ArgumentException(ErrorMessages.InvalidGender())
         };
 

@@ -27,7 +27,7 @@ public class SimulateTournamentHandler(
         return new SimulateTournamentResponseDto
         {
             TournamentId = tournament.Id,
-            Winner = tournament.Winner?.GetFullName() ?? string.Empty
+            Winner = tournament.Winner?.FullName ?? string.Empty
         };
     }
 }
