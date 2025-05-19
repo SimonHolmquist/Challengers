@@ -4,16 +4,16 @@ A backend system for simulating tennis tournaments with knockout rules, supporti
 
 ## Table of Contents
 
-- Project Overview
-- Architecture
-- Project Structure
-- Technologies Used
-- Testing
-- Running Locally with Docker
-- Production Deployment
-- Branches
-- License
-- Author
+- [Project Overview](#project-overview)
+- [Architecture](#architecture)
+- [Project Structure](#project-structure)
+- [Technologies Used](#technologies-used)
+- [Testing](#testing)
+- [Running Locally with Docker](#running-locally-with-docker)
+- [Production Deployment](#production-deployment)
+- [Branches](#branches)
+- [License](#license)
+- [Author](#author)
 
 ---
 
@@ -61,7 +61,7 @@ tests/
 
 ## Technologies Used
 
-- .NET 8
+- [.NET 8](https://dotnet.microsoft.com/en-us/download)
 - ASP.NET Core
 - Entity Framework Core
 - MediatR (CQRS)
@@ -69,7 +69,7 @@ tests/
 - SQL Server (Docker / Azure)
 - Swagger / OpenAPI
 - JWT Authentication
-- Localization (.resx)
+- Localization (`.resx`)
 - Docker & Docker Compose
 - GitHub Actions CI/CD
 - Azure Web App, SQL Server, Key Vault
@@ -155,7 +155,7 @@ Development followed Git Flow:
 
 ## License
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ---
 
