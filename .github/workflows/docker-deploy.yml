@@ -33,12 +33,14 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: ./src/Challengers.Api
+          file: ./src/Challengers.Api/Dockerfile
           push: true
           tags: |
             simonholmquist/challengers-api:latest
             simonholmquist/challengers-api:${{ github.sha }}
           labels: ${{ steps.meta.outputs.labels }}
+
       - name: Trigger Azure Web App Deployment
         run: |
           curl -X POST "${{ secrets.AZURE_WEBHOOK_URL }}"
