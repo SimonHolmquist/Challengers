@@ -36,6 +36,8 @@ jobs:
           context: ./src/
           file: ./src/Challengers.Api/Dockerfile.azure
           push: true
+          build-args: |
+            GIT_COMMIT_SHA=${{ github.sha }}
           tags: |
             simonholmquist/challengers-api:latest
             simonholmquist/challengers-api:${{ github.sha }}
