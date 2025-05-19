@@ -34,7 +34,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./src/Challengers.Api
-          file: ./src/Challengers.Api/Dockerfile
+          file: ./src/Challengers.Api/Dockerfile.azure
           push: true
           tags: |
             simonholmquist/challengers-api:latest
