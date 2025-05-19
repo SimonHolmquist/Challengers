@@ -27,6 +27,7 @@ public class TournamentRepository(ChallengersDbContext context) : Repository<Tou
     public async Task<List<Tournament>> GetFilteredAsync(GetTournamentsQueryDto dto, CancellationToken cancellationToken)
     {
         var query = _context.Tournaments
+            .Include(t => t.Winner)
             .Include(t => t.Matches)
             .ThenInclude(m => m.Player1)
             .Include(t => t.Matches)

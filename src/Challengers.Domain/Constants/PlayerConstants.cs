@@ -3,7 +3,7 @@
 public static class PlayerConstants
 {
     public const int MaxNameLength = 50;
-    public const int MaxSurnameLength = 50;
+    public const int MaxLastNameLength = 50;
     public const int MinStat = 0;
     public const int MaxStat = 100;
 

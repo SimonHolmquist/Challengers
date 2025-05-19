@@ -18,8 +18,8 @@ public class GetPlayerByIdHandler(IPlayerRepository repository)
         return new PlayerDto
         {
             Id = player.Id,
-            Name = player.Name,
-            Surname = player.Surname,
+            FirstName = player.FirstName,
+            LastName = player.LastName,
             Skill = player.Skill,
             Strength = player is MalePlayer m ? m.Strength : null,
             Speed = player is MalePlayer m2 ? m2.Speed : null,

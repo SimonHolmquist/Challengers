@@ -8,13 +8,13 @@ public class CreatePlayerRequestDtoValidator : AbstractValidator<CreatePlayerReq
 {
     public CreatePlayerRequestDtoValidator()
     {
-        RuleFor(x => x.Name)
-            .NotEmpty().WithMessage(GetMessage(NameRequired))
-            .MaximumLength(MaxNameLength).WithMessage(GetMessage(NameTooLong));
+        RuleFor(x => x.FirstName)
+            .NotEmpty().WithMessage(GetMessage(FirstNameRequired))
+            .MaximumLength(MaxNameLength).WithMessage(GetMessage(FirstNameTooLong));
 
-        RuleFor(x => x.Surname)
-            .NotEmpty().WithMessage(GetMessage(SurnameRequired))
-            .MaximumLength(MaxSurnameLength).WithMessage(GetMessage(SurnameTooLong));
+        RuleFor(x => x.LastName)
+            .NotEmpty().WithMessage(GetMessage(LastNameRequired))
+            .MaximumLength(MaxLastNameLength).WithMessage(GetMessage(LastNameTooLong));
 
         RuleFor(x => x.Skill)
             .InclusiveBetween(MinStat, MaxStat)

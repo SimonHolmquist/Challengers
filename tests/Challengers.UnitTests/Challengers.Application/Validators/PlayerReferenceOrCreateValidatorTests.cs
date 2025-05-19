@@ -14,7 +14,7 @@ public class PlayerReferenceOrCreateValidatorTests
     public void Validate_ShouldHaveError_WhenIdIsEmpty()
     {
         // Arrange
-        var model = new PlayerDto { Id = Guid.Empty, Name = "Test" };
+        var model = new PlayerDto { Id = Guid.Empty, FirstName = "Test" };
 
         // Act
         var result = _validator.TestValidate(model);
@@ -42,8 +42,8 @@ public class PlayerReferenceOrCreateValidatorTests
         // Arrange
         var model = new PlayerDto
         {
-            Name = "",
-            Surname = "",
+            FirstName = "",
+            LastName = "",
             Skill = 200,
             Gender = Gender.Male,
             Strength = 120,
@@ -64,8 +64,8 @@ public class PlayerReferenceOrCreateValidatorTests
         // Arrange
         var model = new PlayerDto
         {
-            Name = "Lucía",
-            Surname = "Martínez",
+            FirstName = "Lucía",
+            LastName = "Martínez",
             Skill = 80,
             ReactionTime = 85,
             Gender = Gender.Female,

@@ -5,7 +5,7 @@ namespace Challengers.Application.DTOs
     public record class GetPlayersQueryDto : PaginationQueryDto
     {
         public Gender? Gender { get; init; }
-        public string? Name { get; init; }
-        public string? Surname { get; init; }
+        public string? FirstName { get; init; }
+        public string? LastName { get; init; }
     }
 }

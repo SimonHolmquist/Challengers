@@ -4,8 +4,8 @@ namespace Challengers.Application.DTOs;
 
 public record class UpdatePlayerRequestDto
 {
-    public string? Name { get; init; }
-    public string? Surname { get; init; }
+    public string? FirstName { get; init; }
+    public string? LastName { get; init; }
     public int? Skill { get; init; }
     public int? Strength { get; init; }
     public int? Speed { get; init; }

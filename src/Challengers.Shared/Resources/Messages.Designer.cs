@@ -79,6 +79,24 @@ namespace Challengers.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to First name cannot be empty..
+        /// </summary>
+        internal static string FirstNameRequired {
+            get {
+                return ResourceManager.GetString("FirstNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Player first name must be at most {0} characters..
+        /// </summary>
+        internal static string FirstNameTooLong {
+            get {
+                return ResourceManager.GetString("FirstNameTooLong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to  Format error in message: {0}.
         /// </summary>
         internal static string FormatError {
@@ -133,6 +151,24 @@ namespace Challengers.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Player last name is required..
+        /// </summary>
+        internal static string LastNameRequired {
+            get {
+                return ResourceManager.GetString("LastNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Player last name must be at most {0} characters..
+        /// </summary>
+        internal static string LastNameTooLong {
+            get {
+                return ResourceManager.GetString("LastNameTooLong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} * {1} (skill) + {2} * {3} (strength) + {4} * {5} (speed) + {6} * {7} (luck) = {8} total score.
         /// </summary>
         internal static string MaleScoreExplanation {
@@ -174,24 +210,6 @@ namespace Challengers.Shared.Resources {
         internal static string MixedGenderAttributes {
             get {
                 return ResourceManager.GetString("MixedGenderAttributes", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Name cannot be empty..
-        /// </summary>
-        internal static string NameRequired {
-            get {
-                return ResourceManager.GetString("NameRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Player name must be at most {0} characters..
-        /// </summary>
-        internal static string NameTooLong {
-            get {
-                return ResourceManager.GetString("NameTooLong", resourceCulture);
             }
         }
         
@@ -327,24 +345,6 @@ namespace Challengers.Shared.Resources {
         internal static string StrengthRequiredForMale {
             get {
                 return ResourceManager.GetString("StrengthRequiredForMale", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Player surname is required..
-        /// </summary>
-        internal static string SurnameRequired {
-            get {
-                return ResourceManager.GetString("SurnameRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Player surname must be at most {0} characters..
-        /// </summary>
-        internal static string SurnameTooLong {
-            get {
-                return ResourceManager.GetString("SurnameTooLong", resourceCulture);
             }
         }
         

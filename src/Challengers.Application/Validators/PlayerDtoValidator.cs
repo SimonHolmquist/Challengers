@@ -10,15 +10,15 @@ public class PlayerDtoValidator : AbstractValidator<PlayerDto>
         RuleFor(x => x.Id)
             .NotEmpty().WithMessage(GetMessage(PlayerIdRequired));
 
-        RuleFor(x => x.Name)
+        RuleFor(x => x.FirstName)
             .MaximumLength(MaxNameLength)
-            .When(x => !string.IsNullOrWhiteSpace(x.Name))
-            .WithMessage(FormatMessage(NameTooLong, MaxNameLength));
+            .When(x => !string.IsNullOrWhiteSpace(x.FirstName))
+            .WithMessage(FormatMessage(FirstNameTooLong, MaxNameLength));
 
-        RuleFor(x => x.Surname)
-            .MaximumLength(MaxSurnameLength)
-            .When(x => !string.IsNullOrWhiteSpace(x.Name))
-            .WithMessage(FormatMessage(SurnameTooLong, MaxSurnameLength));
+        RuleFor(x => x.LastName)
+            .MaximumLength(MaxLastNameLength)
+            .When(x => !string.IsNullOrWhiteSpace(x.FirstName))
+            .WithMessage(FormatMessage(LastNameTooLong, MaxLastNameLength));
 
         RuleFor(x => x.Skill)
             .InclusiveBetween(MinStat, MaxStat)

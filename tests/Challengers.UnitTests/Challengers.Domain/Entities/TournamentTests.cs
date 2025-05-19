@@ -172,8 +172,8 @@ public class TournamentTests
         tournament.IsCompleted.Should().BeTrue();
         tournament.Matches.Should().HaveCount(7);
         tournament.Winner.Should().NotBeNull();
-        tournament.Winner!.Name.Should().Be("Player");
-        tournament.Winner!.Surname.Should().Be("1");
+        tournament.Winner!.FirstName.Should().Be("Player");
+        tournament.Winner!.LastName.Should().Be("1");
     }
 
     [Theory]

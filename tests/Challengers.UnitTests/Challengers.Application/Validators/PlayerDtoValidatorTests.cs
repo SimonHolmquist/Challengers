@@ -30,32 +30,32 @@ public class PlayerDtoValidatorTests
         var model = new PlayerDto
         {
             Id = Guid.NewGuid(),
-            Name = new string('A', 101)
+            FirstName = new string('A', 101)
         };
 
         // Act
         var result = _validator.TestValidate(model);
 
         // Assert
-        result.ShouldHaveValidationErrorFor(x => x.Name);
+        result.ShouldHaveValidationErrorFor(x => x.FirstName);
     }
 
     [Fact]
-    public void Validate_ShouldHaveError_WhenSurnameTooLong()
+    public void Validate_ShouldHaveError_WhenLastNameTooLong()
     {
         // Arrange
         var model = new PlayerDto
         {
             Id = Guid.NewGuid(),
-            Name = "Test",
-            Surname = new string('B', 101)
+            FirstName = "Test",
+            LastName = new string('B', 101)
         };
 
         // Act
         var result = _validator.TestValidate(model);
 
         // Assert
-        result.ShouldHaveValidationErrorFor(x => x.Surname);
+        result.ShouldHaveValidationErrorFor(x => x.LastName);
     }
 
     [Fact]
@@ -82,8 +82,8 @@ public class PlayerDtoValidatorTests
         var model = new PlayerDto
         {
             Id = Guid.NewGuid(),
-            Name = "Carlos",
-            Surname = "Gomez",
+            FirstName = "Carlos",
+            LastName = "Gomez",
             Skill = 90,
             Gender = Gender.Male
         };

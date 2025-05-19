@@ -41,8 +41,8 @@ public static class TestHelper
         return [.. Enumerable.Range(1, count)
             .Select(i => new PlayerDto
             {
-                Name = $"Player{i}",
-                Surname = $"Surname{i}",
+                FirstName = $"Player{i}",
+                LastName = $"LastName{i}",
                 Skill = 80,
                 Strength = 80,
                 Speed = 80,
@@ -53,8 +53,8 @@ public static class TestHelper
     public static CreatePlayerRequestDto GetValidMalePlayer() =>
         new()
         {
-            Name = "Juan",
-            Surname = "Pérez",
+            FirstName = "Juan",
+            LastName = "Pérez",
             Gender = Gender.Male,
             Skill = 80,
             Strength = 85,
@@ -65,8 +65,8 @@ public static class TestHelper
     public static CreatePlayerRequestDto GetValidFemalePlayer() =>
         new()
         {
-            Name = "Ana",
-            Surname = "Gómez",
+            FirstName = "Ana",
+            LastName = "Gómez",
             Gender = Gender.Female,
             Skill = 75,
             ReactionTime = 85,
@@ -78,7 +78,7 @@ public static class TestHelper
     {
         var _client = client;
         await _client.PostAsJsonAsync("/api/players", dto);
-        var response = await _client.GetAsync($"/api/players?name={dto.Name}");
+        var response = await _client.GetAsync($"/api/players?firstname={dto.FirstName}");
         var raw = await response.Content.ReadAsStringAsync();
         var paged = JsonSerializer.Deserialize<PagedResultDto<PlayerDto>>(raw, _jsonSerializerOptions);
         return paged!.Items[0].Id;

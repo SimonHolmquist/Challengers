@@ -21,8 +21,8 @@ namespace Challengers.UnitTests.Challengers.Application.Features.Players.Command
 
             var dto = new UpdatePlayerRequestDto
             {
-                Name = "Carlos",
-                Surname = "Lopez",
+                FirstName = "Carlos",
+                LastName = "Lopez",
                 Skill = 90,
                 Strength = 85,
                 Speed = 75,
@@ -40,8 +40,8 @@ namespace Challengers.UnitTests.Challengers.Application.Features.Players.Command
             await handler.Handle(command, CancellationToken.None);
 
             // Assert
-            existing.Name.Should().Be("Carlos");
-            existing.Surname.Should().Be("Lopez");
+            existing.FirstName.Should().Be("Carlos");
+            existing.LastName.Should().Be("Lopez");
             existing.Skill.Should().Be(90);
             existing.Strength.Should().Be(85);
             existing.Speed.Should().Be(75);
@@ -60,8 +60,8 @@ namespace Challengers.UnitTests.Challengers.Application.Features.Players.Command
 
             var dto = new UpdatePlayerRequestDto
             {
-                Name = "Ana",
-                Surname = "Lopez",
+                FirstName = "Ana",
+                LastName = "Lopez",
                 Skill = 85,
                 ReactionTime = 90,
                 Gender = Gender.Female
@@ -80,8 +80,8 @@ namespace Challengers.UnitTests.Challengers.Application.Features.Players.Command
             // Assert
             repositoryMock.Verify(r => r.Delete(It.Is<Player>(p => p == existing)), Times.Once);
             repositoryMock.Verify(r => r.AddAsync(It.Is<FemalePlayer>(p =>
-                p.Name == "Ana" &&
-                p.Surname == "Lopez" &&
+                p.FirstName == "Ana" &&
+                p.LastName == "Lopez" &&
                 p.Skill == 85 &&
                 p.ReactionTime == 90 &&
                 p.Id == id
@@ -97,8 +97,8 @@ namespace Challengers.UnitTests.Challengers.Application.Features.Players.Command
             var id = Guid.NewGuid();
             var dto = new UpdatePlayerRequestDto
             {
-                Name = "Juan",
-                Surname = "Pérez",
+                FirstName = "Juan",
+                LastName = "Pérez",
                 Skill = 80,
                 Gender = Gender.Male,
                 Strength = 70,
@@ -130,8 +130,8 @@ namespace Challengers.UnitTests.Challengers.Application.Features.Players.Command
 
             var dto = new UpdatePlayerRequestDto
             {
-                Name = "Test",
-                Surname = "Test",
+                FirstName = "Test",
+                LastName = "Test",
                 Skill = 70,
                 Gender = (Gender)99
             };

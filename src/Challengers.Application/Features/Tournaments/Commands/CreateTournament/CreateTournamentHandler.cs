@@ -4,7 +4,6 @@ using Challengers.Domain.Entities;
 using Challengers.Domain.Enums;
 using Challengers.Shared.Helpers;
 using MediatR;
-using System.Collections.Generic;
 
 namespace Challengers.Application.Features.Tournaments.Commands.CreateTournament;
 
@@ -38,15 +37,15 @@ public class CreateTournamentHandler(ITournamentRepository tournamentRepository,
                 Player newPlayer = dto.Gender switch
                 {
                     Gender.Male => new MalePlayer(
-                        playerDto.Name!,
-                        playerDto.Surname!,
+                        playerDto.FirstName!,
+                        playerDto.LastName!,
                         playerDto.Skill!.Value,
                         playerDto.Strength!.Value,
                         playerDto.Speed!.Value),
 
                     Gender.Female => new FemalePlayer(
-                        playerDto.Name!,
-                        playerDto.Surname!,
+                        playerDto.FirstName!,
+                        playerDto.LastName!,
                         playerDto.Skill!.Value,
                         playerDto.ReactionTime!.Value),
 
@@ -63,7 +62,7 @@ public class CreateTournamentHandler(ITournamentRepository tournamentRepository,
         var mismatchedPlayers = players.Where(p => p.Gender != dto.Gender).ToList();
         if (mismatchedPlayers.Count != 0)
         {
-            var offendingNames = string.Join(", ", mismatchedPlayers.Select(p => p.GetFullName()));
+            var offendingNames = string.Join(", ", mismatchedPlayers.Select(p => p.FullName));
             throw new ArgumentException(FormatMessage(TournamentPlayersGenderMismatch, dto.Gender, offendingNames));
         }
 

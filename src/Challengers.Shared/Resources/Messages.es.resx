@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="NameRequired" xml:space="preserve">
+  <data name="FirstNameRequired" xml:space="preserve">
     <value>El nombre no puede estar vacío.</value>
   </data>
   <data name="ReactionOutOfRange" xml:space="preserve">
@@ -204,13 +204,13 @@
   <data name="MixedGenderAttributes" xml:space="preserve">
     <value>Un jugador no puede tener tiempo de reacción y fuerza/velocidad.</value>
   </data>
-  <data name="SurnameRequired" xml:space="preserve">
+  <data name="LastNameRequired" xml:space="preserve">
     <value>Se requiere el apellido del jugador.</value>
   </data>
-  <data name="SurnameTooLong" xml:space="preserve">
+  <data name="LastNameTooLong" xml:space="preserve">
     <value>El apellido del jugador debe tener como máximo {0} caracteres.</value>
   </data>
-  <data name="NameTooLong" xml:space="preserve">
+  <data name="FirstNameTooLong" xml:space="preserve">
     <value>El nombre del jugador debe tener como máximo {0} caracteres.</value>
   </data>
   <data name="PlayerIdRequired" xml:space="preserve">
