@@ -4,14 +4,16 @@ A backend system for simulating tennis tournaments with knockout rules, supporti
 
 ## Table of Contents
 
-- [Project Overview](#project-overview)
-- [Architecture](#architecture)
-- [Project Structure](#project-structure)
-- [Technologies Used](#technologies-used)
-- [Testing](#testing)
-- [Running Locally with Docker](#running-locally-with-docker)
-- [Branches](#branches)
-- [License](#license)
+- Project Overview
+- Architecture
+- Project Structure
+- Technologies Used
+- Testing
+- Running Locally with Docker
+- Production Deployment
+- Branches
+- License
+- Author
 
 ---
 
@@ -59,16 +61,18 @@ tests/
 
 ## Technologies Used
 
-- [.NET 8](https://dotnet.microsoft.com/en-us/download)
+- .NET 8
 - ASP.NET Core
 - Entity Framework Core
 - MediatR (CQRS)
 - FluentValidation
-- SQL Server (Docker)
+- SQL Server (Docker / Azure)
 - Swagger / OpenAPI
 - JWT Authentication
-- Localization (`.resx`)
+- Localization (.resx)
 - Docker & Docker Compose
+- GitHub Actions CI/CD
+- Azure Web App, SQL Server, Key Vault
 
 ---
 
@@ -96,6 +100,43 @@ tests/
 
 ---
 
+## Production Deployment
+
+The API is deployed to Azure using a containerized Web App with automated CI/CD via GitHub Actions.
+
+### Live Demo
+
+Access the live API:
+
+```
+https://challengers-api-ffg7h4cdhdbzh2gd.brazilsouth-01.azurewebsites.net/swagger/index.html
+```
+
+Useful endpoints:
+- `/swagger` – interactive API docs
+- `/version` – shows current app version and Git SHA
+
+### Azure Resources
+
+The system is deployed using the following Azure services:
+
+- App Service: hosts the containerized .NET 8 Web API
+- Azure SQL Server + Database: persistent storage for tournaments and players
+- Azure Key Vault: securely stores secrets such as JWT signing key and DB connection string
+- App Configuration:
+  - Uses `@Microsoft.KeyVault` reference syntax to fetch secrets at runtime
+  - Example: `@Microsoft.KeyVault(SecretUri=https://challengers-kv.vault.azure.net/secrets/ConnectionStrings--DefaultConnection)`
+
+### CI/CD Pipeline
+
+- Every time a pull request is merged to `main`:
+  - A GitHub Actions workflow builds a Docker image using `Dockerfile.azure`
+  - The image is tagged with `latest` and the full Git commit SHA
+  - It is pushed to Docker Hub
+  - A webhook triggers an automatic redeploy in Azure Web App
+
+---
+
 ## Branches
 
 Development followed Git Flow:
@@ -114,7 +155,7 @@ Development followed Git Flow:
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the LICENSE file for details.
 
 ---
 
