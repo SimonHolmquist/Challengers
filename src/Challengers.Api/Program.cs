@@ -1,4 +1,5 @@
-﻿using Challengers.Api.Middleware;
+﻿using Challengers.Api.Internal;
+using Challengers.Api.Middleware;
 using Challengers.Application.Behaviors;
 using Challengers.Application.Features.Tournaments.Commands.CreateTournament;
 using Challengers.Application.Validators;
@@ -138,6 +139,11 @@ public class Program
         app.UseAuthentication();
         app.UseAuthorization();
         app.MapControllers();
+        app.MapGet("/version", () => new
+        {
+            version = VersionInfo.Version,
+            commit = VersionInfo.CommitSha
+        });
 
         using (var scope = app.Services.CreateScope())
         {
