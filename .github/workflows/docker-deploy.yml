@@ -33,7 +33,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: ./src/Challengers.Api
+          context: ./src/
           file: ./src/Challengers.Api/Dockerfile.azure
           push: true
           tags: |

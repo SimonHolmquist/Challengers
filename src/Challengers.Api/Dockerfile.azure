@@ -5,9 +5,14 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY ["Challengers.Api.csproj", "."]
-RUN dotnet restore "Challengers.Api.csproj"
+COPY ["Challengers.Api/Challengers.Api.csproj", "Challengers.Api/"]
+COPY ["Challengers.Application/Challengers.Application.csproj", "Challengers.Application/"]
+COPY ["Challengers.Domain/Challengers.Domain.csproj", "Challengers.Domain/"]
+COPY ["Challengers.Infrastructure/Challengers.Infrastructure.csproj", "Challengers.Infrastructure/"]
+COPY ["Challengers.Shared/Challengers.Shared.csproj", "Challengers.Shared/"]
+RUN dotnet restore "Challengers.Api/Challengers.Api.csproj"
 COPY . .
+WORKDIR "/src/Challengers.Api"
 RUN dotnet build "Challengers.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
