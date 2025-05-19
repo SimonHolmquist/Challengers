@@ -58,8 +58,8 @@ public class CreateTournamentRequestDtoValidatorTests
             Gender = Gender.Male,
             Players =
             [
-                new() { Id = duplicatedId, Name = "A", Skill = 80, Strength = 80, Speed = 80, Gender = Gender.Male },
-                new() { Id = duplicatedId, Name = "B", Skill = 85, Strength = 85, Speed = 85, Gender = Gender.Male }
+                new() { Id = duplicatedId, FirstName = "A", Skill = 80, Strength = 80, Speed = 80, Gender = Gender.Male },
+                new() { Id = duplicatedId, FirstName = "B", Skill = 85, Strength = 85, Speed = 85, Gender = Gender.Male }
             ]
         };
 
@@ -80,8 +80,8 @@ public class CreateTournamentRequestDtoValidatorTests
             Gender = Gender.Female,
             Players =
             [
-                new() { Name = "Ana", Surname = "One", Skill = 80, ReactionTime = 85, Gender = Gender.Female },
-                new() { Name = "Laura", Surname = "Two", Skill = 75, ReactionTime = 80, Gender = Gender.Female }
+                new() { FirstName = "Ana", LastName = "One", Skill = 80, ReactionTime = 85, Gender = Gender.Female },
+                new() { FirstName = "Laura", LastName = "Two", Skill = 75, ReactionTime = 80, Gender = Gender.Female }
             ]
         };
 

@@ -17,8 +17,8 @@ namespace Challengers.UnitTests.Challengers.Application.Features.Players.Command
             // Arrange
             var dto = new CreatePlayerRequestDto
             {
-                Name = "Juan",
-                Surname = "Pérez",
+                FirstName = "Juan",
+                LastName = "Pérez",
                 Gender = Gender.Male,
                 Skill = 80,
                 Strength = 85,
@@ -48,8 +48,8 @@ namespace Challengers.UnitTests.Challengers.Application.Features.Players.Command
             // Arrange
             var dto = new CreatePlayerRequestDto
             {
-                Name = "Ana",
-                Surname = "Lopez",
+                FirstName = "Ana",
+                LastName = "Lopez",
                 Gender = Gender.Female,
                 Skill = 90,
                 ReactionTime = 85
@@ -78,8 +78,8 @@ namespace Challengers.UnitTests.Challengers.Application.Features.Players.Command
             // Arrange
             var dto = new CreatePlayerRequestDto
             {
-                Name = "Alex",
-                Surname = "Test",
+                FirstName = "Alex",
+                LastName = "Test",
                 Gender = (Gender)99,
                 Skill = 80
             };

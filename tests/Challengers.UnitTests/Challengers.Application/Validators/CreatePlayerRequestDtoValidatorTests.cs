@@ -13,13 +13,13 @@ public class CreatePlayerRequestDtoValidatorTests
     public void Validate_ShouldHaveError_WhenNameIsEmpty()
     {
         // Arrange
-        var model = TestHelper.GetValidMalePlayer() with { Name = "" };
+        var model = TestHelper.GetValidMalePlayer() with { FirstName = "" };
 
         // Act
         var result = _validator.TestValidate(model);
 
         // Assert
-        result.ShouldHaveValidationErrorFor(x => x.Name);
+        result.ShouldHaveValidationErrorFor(x => x.FirstName);
     }
 
     [Fact]

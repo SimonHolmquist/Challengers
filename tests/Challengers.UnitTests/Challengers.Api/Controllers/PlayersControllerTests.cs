@@ -17,15 +17,15 @@ public class PlayersControllerTests(CustomWebApplicationFactory factory) : IClas
     };
 
     [Fact]
-    public async Task GetAll_ShouldFilterByGenderAndName()
+    public async Task GetAll_ShouldFilterByGenderAndFirstName()
     {
         // Arrange
         var uniqueName1 = $"Ana_{Guid.NewGuid().ToString("N")[..8]}";
         var uniqueName2 = $"Carlos_{Guid.NewGuid().ToString("N")[..8]}";
         var female1 = new CreatePlayerRequestDto
         {
-            Name = uniqueName1,
-            Surname = "Perez",
+            FirstName = uniqueName1,
+            LastName = "Perez",
             Gender = Gender.Female,
             Skill = 80,
             ReactionTime = 90
@@ -33,8 +33,8 @@ public class PlayersControllerTests(CustomWebApplicationFactory factory) : IClas
 
         var male1 = new CreatePlayerRequestDto
         {
-            Name = uniqueName2,
-            Surname = "Lopez",
+            FirstName = uniqueName2,
+            LastName = "Lopez",
             Gender = Gender.Male,
             Skill = 85,
             Strength = 80,
@@ -45,7 +45,7 @@ public class PlayersControllerTests(CustomWebApplicationFactory factory) : IClas
         await _client.PostAsJsonAsync("/api/players", male1);
 
         // Act
-        var response = await _client.GetAsync($"/api/players?gender=2&name={uniqueName1}");
+        var response = await _client.GetAsync($"/api/players?gender=2&firstname={uniqueName1}");
 
         // Assert
         response.EnsureSuccessStatusCode();
@@ -54,7 +54,7 @@ public class PlayersControllerTests(CustomWebApplicationFactory factory) : IClas
         var paged = JsonSerializer.Deserialize<PagedResultDto<PlayerDto>>(raw, _jsonSerializerOptions);
 
         paged!.Items.Should().ContainSingle();
-        paged.Items[0].Name!.Should().Be(uniqueName1);
+        paged.Items[0].FirstName!.Should().Be(uniqueName1);
         paged.Items[0].Gender.Should().Be(Gender.Female);
     }
 
@@ -64,8 +64,8 @@ public class PlayersControllerTests(CustomWebApplicationFactory factory) : IClas
         // Arrange
         var request = new CreatePlayerRequestDto
         {
-            Name = "Lucía",
-            Surname = "Martínez",
+            FirstName = "Lucía",
+            LastName = "Martínez",
             Gender = Gender.Female,
             Skill = 78,
             ReactionTime = 85
@@ -84,7 +84,7 @@ public class PlayersControllerTests(CustomWebApplicationFactory factory) : IClas
 
         var paged = JsonSerializer.Deserialize<PagedResultDto<PlayerDto>>(listRaw, _jsonSerializerOptions);
 
-        paged!.Items.Should().ContainSingle(p => p.Name == "Lucía" && p.Surname == "Martínez");
+        paged!.Items.Should().ContainSingle(p => p.FirstName == "Lucía" && p.LastName == "Martínez");
     }
 
     [Fact]
@@ -93,8 +93,8 @@ public class PlayersControllerTests(CustomWebApplicationFactory factory) : IClas
         // Arrange
         var request = new CreatePlayerRequestDto
         {
-            Name = "Carlos",
-            Surname = "Error",
+            FirstName = "Carlos",
+            LastName = "Error",
             Gender = Gender.Male,
             Skill = 105,
             Strength = null,
@@ -120,8 +120,8 @@ public class PlayersControllerTests(CustomWebApplicationFactory factory) : IClas
         var uniqueName = $"Lucía_{Guid.NewGuid().ToString("N")[..8]}";
         var create = new CreatePlayerRequestDto
         {
-            Name = uniqueName,
-            Surname = "Martínez",
+            FirstName = uniqueName,
+            LastName = "Martínez",
             Gender = Gender.Female,
             Skill = 70,
             ReactionTime = 80
@@ -130,7 +130,7 @@ public class PlayersControllerTests(CustomWebApplicationFactory factory) : IClas
         var createResponse = await _client.PostAsJsonAsync("/api/players", create);
         createResponse.EnsureSuccessStatusCode();
 
-        var listResponse = await _client.GetAsync($"/api/players?name={uniqueName}&page=1&pageSize=10");
+        var listResponse = await _client.GetAsync($"/api/players?firstname={uniqueName}&page=1&pageSize=10");
         var listRaw = await listResponse.Content.ReadAsStringAsync();
         var paged = JsonSerializer.Deserialize<PagedResultDto<PlayerDto>>(listRaw, _jsonSerializerOptions);
         var playerId = paged!.Items.Single().Id;
@@ -138,7 +138,7 @@ public class PlayersControllerTests(CustomWebApplicationFactory factory) : IClas
         // Act
         var update = new UpdatePlayerRequestDto
         {
-            Name = "Luciana",
+            FirstName = "Luciana",
             Skill = 90
         };
 
@@ -152,19 +152,20 @@ public class PlayersControllerTests(CustomWebApplicationFactory factory) : IClas
 
         var updated = JsonSerializer.Deserialize<PlayerDto>(updatedRaw, _jsonSerializerOptions);
 
-        updated!.Name.Should().Be("Luciana");
+        updated!.FirstName.Should().Be("Luciana");
         updated.Skill.Should().Be(90);
     }
 
     [Fact]
-    public async Task Put_ShouldUpdateOnlyName_WhenOtherFieldsMissing()
+    public async Task Put_ShouldUpdateOnlyFirstName_WhenOtherFieldsMissing()
     {
         // Arrange
-        var uniqueName = $"Lucía_{Guid.NewGuid().ToString("N")[..8]}";
+        var uniqueName1 = $"Lucía_{Guid.NewGuid().ToString("N")[..8]}";
+        var uniqueName2 = $"Luciana_{Guid.NewGuid().ToString("N")[..8]}";
         var create = new CreatePlayerRequestDto
         {
-            Name = uniqueName,
-            Surname = "Martínez",
+            FirstName = uniqueName1,
+            LastName = "Martínez",
             Gender = Gender.Female,
             Skill = 75,
             ReactionTime = 88
@@ -174,7 +175,7 @@ public class PlayersControllerTests(CustomWebApplicationFactory factory) : IClas
 
         var update = new UpdatePlayerRequestDto
         {
-            Name = "Luciana"
+            FirstName = uniqueName2
         };
 
         // Act & Assert
@@ -182,8 +183,8 @@ public class PlayersControllerTests(CustomWebApplicationFactory factory) : IClas
         putResponse.EnsureSuccessStatusCode();
 
         var updated = await TestHelper.GetPlayer(playerId.Value, _client);
-        updated.Name.Should().Be("Luciana");
-        updated.Surname.Should().Be("Martínez");
+        updated.FirstName.Should().Be(uniqueName2);
+        updated.LastName.Should().Be("Martínez");
         updated.Skill.Should().Be(75);
     }
 
@@ -193,8 +194,8 @@ public class PlayersControllerTests(CustomWebApplicationFactory factory) : IClas
         // Arrange
         var create = new CreatePlayerRequestDto
         {
-            Name = "Pedro",
-            Surname = "Cambio",
+            FirstName = "Pedro",
+            LastName = "Cambio",
             Gender = Gender.Male,
             Skill = 80,
             Strength = 85,
@@ -224,10 +225,11 @@ public class PlayersControllerTests(CustomWebApplicationFactory factory) : IClas
     public async Task Put_ShouldUpdateStrengthAndSpeed_WhenMale()
     {
         // Arrange
+        var uniqueName1 = $"Luis_{Guid.NewGuid().ToString("N")[..8]}";
         var create = new CreatePlayerRequestDto
         {
-            Name = "Luis",
-            Surname = "Fuerte",
+            FirstName = uniqueName1,
+            LastName = "Fuerte",
             Gender = Gender.Male,
             Skill = 70,
             Strength = 70,
@@ -257,8 +259,8 @@ public class PlayersControllerTests(CustomWebApplicationFactory factory) : IClas
         // Arrange
         var create = new CreatePlayerRequestDto
         {
-            Name = "Juan",
-            Surname = "Error",
+            FirstName = "Juan",
+            LastName = "Error",
             Gender = Gender.Male,
             Skill = 70,
             Strength = 70,
@@ -285,8 +287,8 @@ public class PlayersControllerTests(CustomWebApplicationFactory factory) : IClas
     {
         var create = new CreatePlayerRequestDto
         {
-            Name = "Carlos",
-            Surname = "Invalid",
+            FirstName = "Carlos",
+            LastName = "Invalid",
             Gender = Gender.Male,
             Skill = 80,
             Strength = 80,
@@ -314,8 +316,8 @@ public class PlayersControllerTests(CustomWebApplicationFactory factory) : IClas
         var uniqueName = $"Carlos_{Guid.NewGuid():N}[..8]";
         var create = new CreatePlayerRequestDto
         {
-            Name = uniqueName,
-            Surname = "Borrable",
+            FirstName = uniqueName,
+            LastName = "Borrable",
             Gender = Gender.Male,
             Skill = 70,
             Strength = 80,
@@ -325,7 +327,7 @@ public class PlayersControllerTests(CustomWebApplicationFactory factory) : IClas
         var createResponse = await _client.PostAsJsonAsync("/api/players", create);
         createResponse.EnsureSuccessStatusCode();
 
-        var getResponse = await _client.GetAsync($"/api/players?name={uniqueName}&page=1&pageSize=1");
+        var getResponse = await _client.GetAsync($"/api/players?firstname={uniqueName}&page=1&pageSize=1");
         var paged = await getResponse.Content.ReadFromJsonAsync<PagedResultDto<PlayerDto>>(_jsonSerializerOptions);
         var playerId = paged!.Items.Single().Id;
 
@@ -358,8 +360,8 @@ public class PlayersControllerTests(CustomWebApplicationFactory factory) : IClas
         // Arrange
         var dto = new CreatePlayerRequestDto
         {
-            Name = "Carlos",
-            Surname = "Validez",
+            FirstName = "Carlos",
+            LastName = "Validez",
             Gender = Gender.Male,
             Skill = 80
         };
@@ -390,8 +392,8 @@ public class PlayersControllerTests(CustomWebApplicationFactory factory) : IClas
         // Arrange
         var dto = new CreatePlayerRequestDto
         {
-            Name = "Carlos",
-            Surname = "Validez",
+            FirstName = "Carlos",
+            LastName = "Validez",
             Gender = Gender.Male,
             Skill = 80
         };

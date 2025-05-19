@@ -35,7 +35,7 @@ public class GetTournamentResultHandlerTests
         result.Id.Should().Be(id);
         result.Name.Should().Be("Finalizado");
         result.Gender.Should().Be(Gender.Female);
-        result.Winner.Should().Be(tournament.Winner!.GetFullName());
+        result.Winner.Should().Be(tournament.Winner!.FullName);
     }
 
     [Fact]

@@ -46,8 +46,8 @@ public class AuthControllerTests(CustomAuthWebApplicationFactoryForAuth factory)
         // Arrange
         var dto = new CreatePlayerRequestDto
         {
-            Name = "Infiltrado",
-            Surname = "NoAuth",
+            FirstName = "Infiltrado",
+            LastName = "NoAuth",
             Gender = Gender.Male,
             Skill = 70,
             Strength = 80,

@@ -12,13 +12,13 @@ public class PlayerConfiguration : IEntityTypeConfiguration<Player>
     {
         builder.HasKey(p => p.Id);
 
-        builder.Property(p => p.Name)
+        builder.Property(p => p.FirstName)
             .IsRequired()
             .HasMaxLength(PlayerConstants.MaxNameLength);
 
-        builder.Property(p => p.Surname)
+        builder.Property(p => p.LastName)
             .IsRequired()
-            .HasMaxLength(PlayerConstants.MaxSurnameLength);
+            .HasMaxLength(PlayerConstants.MaxLastNameLength);
 
         builder.Property(p => p.Skill)
             .IsRequired();

@@ -20,8 +20,8 @@ public class TournamentsControllerTests(CustomWebApplicationFactory factory) : I
             savePlayers = false,
             players = new[]
             {
-                new { name = "Ana", surname = "Uno", skill = 80, reactionTime = 85, gender = 2 },
-                new { name = "Laura", surname = "Dos", skill = 85, reactionTime = 90, gender = 2 }
+                new { firstname = "Ana", lastname = "Uno", skill = 80, reactionTime = 85, gender = 2 },
+                new { firstname = "Laura", lastname = "Dos", skill = 85, reactionTime = 90, gender = 2 }
             }
         };
 
@@ -45,8 +45,8 @@ public class TournamentsControllerTests(CustomWebApplicationFactory factory) : I
             savePlayers = false,
             players = new[]
             {
-            new { name = "Juan", surname = "Uno", skill = 80, strength = 85, speed = 75, gender = 1 },
-            new { name = "Pedro", surname = "Dos", skill = 78, strength = 82, speed = 74, gender = 0 }
+            new { firstname = "Juan", lastname = "Uno", skill = 80, strength = 85, speed = 75, gender = 1 },
+            new { firstname = "Pedro", lastname = "Dos", skill = 78, strength = 82, speed = 74, gender = 0 }
         }
         };
 
@@ -76,8 +76,8 @@ public class TournamentsControllerTests(CustomWebApplicationFactory factory) : I
             savePlayers = false,
             players = new[]
             {
-            new { name = "Juan", surname = "Uno", skill = 80, strength = 85, speed = 75, gender = 1 },
-            new { name = "Pedro", surname = "Dos", skill = 78, strength = 82, speed = 74, gender = 1 }
+            new { firstname = "Juan", lastname = "Uno", skill = 80, strength = 85, speed = 75, gender = 1 },
+            new { firstname = "Pedro", lastname = "Dos", skill = 78, strength = 82, speed = 74, gender = 1 }
         }
         };
 
@@ -115,8 +115,8 @@ public class TournamentsControllerTests(CustomWebApplicationFactory factory) : I
             savePlayers = false,
             players = new[]
             {
-            new { name = "Ana", surname = "Uno", skill = 85, reactionTime = 90, gender = 2 },
-            new { name = "Laura", surname = "Dos", skill = 82, reactionTime = 88, gender = 2 }
+            new { firstname = "Ana", lastname = "Uno", skill = 85, reactionTime = 90, gender = 2 },
+            new { firstname = "Laura", lastname = "Dos", skill = 82, reactionTime = 88, gender = 2 }
         }
         };
 
@@ -127,8 +127,8 @@ public class TournamentsControllerTests(CustomWebApplicationFactory factory) : I
             savePlayers = false,
             players = new[]
             {
-            new { name = "Juan", surname = "Tres", skill = 80, strength = 85, speed = 75, gender = 1 },
-            new { name = "Pedro", surname = "Cuatro", skill = 78, strength = 82, speed = 74, gender = 1 }
+            new { firstname = "Juan", lastname = "Tres", skill = 80, strength = 85, speed = 75, gender = 1 },
+            new { firstname = "Pedro", lastname = "Cuatro", skill = 78, strength = 82, speed = 74, gender = 1 }
         }
         };
 

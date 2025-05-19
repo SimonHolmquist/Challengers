@@ -22,7 +22,7 @@ public class GetTournamentResultHandler(
             Name = tournament.Name,
             Gender = tournament.Gender,
             CreatedAt = tournament.CreatedAt,
-            Winner = tournament.Winner?.GetFullName() ?? string.Empty
+            Winner = tournament.Winner?.FullName ?? string.Empty
         };
     }
 }

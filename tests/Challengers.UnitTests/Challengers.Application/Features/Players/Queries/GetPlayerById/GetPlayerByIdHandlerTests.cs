@@ -29,7 +29,7 @@ public class GetPlayerByIdHandlerTests
         // Assert
         result.Should().NotBeNull();
         result.Id.Should().Be(id);
-        result.Name.Should().Be("Juan");
+        result.FirstName.Should().Be("Juan");
         result.Strength.Should().Be(70);
     }
 

@@ -8,8 +8,8 @@ public class MalePlayer : Player
     public int Strength { get; private set; }
     public int Speed { get; private set; }
 
-    public MalePlayer(string name, string surname, int skill, int strength, int speed)
-        : base(name, surname, skill, Gender.Male)
+    public MalePlayer(string firstName, string lastName, int skill, int strength, int speed)
+        : base(firstName, lastName, skill, Gender.Male)
     {
         if (strength is < MinStat or > MaxStat)
             throw new ArgumentOutOfRangeException(
